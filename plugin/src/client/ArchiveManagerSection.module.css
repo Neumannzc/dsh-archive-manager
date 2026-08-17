@@ -1,0 +1,217 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 720px;
+  color: var(--dsw-alias-label-primary);
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.intro {
+  margin: 0;
+  font-size: 13px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 12px;
+  font-size: 13px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+/* Group-to-group breathing room: 4px reads as separate sections. */
+.group + .group {
+  margin-top: 4px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The collapsible header row: folder + title + count, matching the sidebar
+   project row height and hover pattern. */
+.groupHead {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+  user-select: none;
+  /* Buttons default to centered text; the flex children must stay
+     left-aligned after the leading folder/arrow slot. */
+  text-align: left;
+}
+
+.groupHead:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+.groupHead:focus-visible {
+  outline: 2px solid var(--dsw-alias-focus-ring);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Expand arrow: points right closed, rotates to point down open. */
+.arrow {
+  flex: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 20px;
+  transition: transform 150ms var(--ds-ease-in-out);
+  color: var(--dsw-alias-label-caption);
+}
+
+.arrowOpen {
+  transform: rotate(90deg);
+}
+
+/* Folder icon shown by default; hidden on hover in favor of the arrow. */
+.folder {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 20px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.groupHead:hover .folder {
+  display: none;
+}
+
+.groupHead:hover .arrow {
+  display: inline-flex;
+}
+
+.groupTitle {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.groupCount {
+  flex: none;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+/* Session rows: flat list matching the sidebar session row spec. */
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  color: var(--dsw-alias-label-primary);
+  /* Mount fade: rows appear by unfolding a group. */
+  animation: row-in 150ms var(--ds-ease-in-out);
+}
+
+.row + .row {
+  margin-top: 2px;
+}
+
+.row:hover {
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+.rowTitle {
+  flex: 1;
+  min-width: 0;
+  margin: 0 6px 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Trailing relative time: 12px tertiary, hidden on hover when actions show. */
+.time {
+  flex: none;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.row:hover .time {
+  display: none;
+}
+
+/* Trailing action buttons: hidden until hover. */
+.rowActions {
+  flex: none;
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.row:hover .rowActions {
+  display: inline-flex;
+}
+
+.iconButton {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.iconButton:hover {
+  color: var(--dsw-alias-label-primary);
+}
+
+@keyframes row-in {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row,
+  .arrow {
+    animation: none;
+    transition: none;
+  }
+}

@@ -2,6 +2,11 @@
 
 DeepSeek Harness（dsh）的一次功能开发交付：在 **设置 → 归档管理** 页面按工作区展示已归档会话，并支持取消归档。
 
+> **开源发布**：本仓库已公开于 https://github.com/Neumannzc/dsh-archive-manager 。
+> 该功能（含核心 `workspace.unarchiveSession` RPC）已在官方 dsh `0.1.0-rc.6` 中发布；
+> 本仓库的独立增量（视觉美化 + 相对时间）以独立插件包形式发布在 [`plugin/`](plugin/README.md)，
+> 安装方式 `dsh plugin add dsh-ui-archive-manager`。完整发布与搜索优化步骤见 [PUBLISHING.md](PUBLISHING.md)。
+
 ## 功能
 
 - **设置入口**：设置面板新增「归档管理」页，位于 [通用设置] → [模型] → [插件] → [Agent 预设] 之下（`settings.section` id `archives`，order 25）。
