@@ -21,7 +21,7 @@ import { existsSync } from 'node:fs'
 import { basename, dirname, resolve as resolvePath, sep } from 'node:path'
 import { transform } from 'lightningcss'
 
-const PACKAGE_NAME = 'dsh-ui-archive-manager'
+const PACKAGE_NAME = '@tangzai/dsh-ui-archive-manager'
 
 /** The module specifiers the dsh shell shares into its frozen module table. */
 const PLATFORM_MODULES = [

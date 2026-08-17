@@ -1,8 +1,8 @@
-# dsh-ui-archive-manager bundle patch: ONE insert over the profile entry tree.
-# The row id is plugin-scoped (ui-archive-manager-*), so this bundle coexists
-# with the official @deepseek-ai/dsh-client-ui-archive-manager row. Installing
-# both renders two "Archive manager" settings sections — prefer either the
-# official row or this one, not both.
+# @tangzai/dsh-ui-archive-manager bundle patch: ONE insert over the profile
+# entry tree. The row id is plugin-scoped (ui-archive-manager-*), so this
+# bundle coexists with the official @deepseek-ai/dsh-client-ui-archive-manager
+# row. Installing both renders two "Archive manager" settings sections —
+# prefer either the official row or this one, not both.
 - insert:
     - id: ui-archive-manager-beautified
-      name: dsh-ui-archive-manager
+      name: '@tangzai/dsh-ui-archive-manager'

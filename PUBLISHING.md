@@ -1,6 +1,6 @@
-# 开源发布指南（dsh-ui-archive-manager）
+# 开源发布指南（@tangzai/dsh-ui-archive-manager）
 
-让其他人能**安装**（`dsh plugin add`）并**搜索到**（npm / GitHub）你的归档管理插件。
+让其他人能**安装**（`dsh plugin --profile web add @tangzai/dsh-ui-archive-manager`）并**搜索到**（npm / GitHub）你的归档管理插件。
 
 ## 现状与定位
 
@@ -8,6 +8,9 @@
   官方 UI 包 `@deepseek-ai/dsh-client-ui-archive-manager` 也已发布。
 - 本仓库的独有增量是**视觉美化 + 相对时间**（3 个文件：`ArchiveManagerSection.tsx` / `.module.css` / `locales.ts`）。
 - 因此独立发布的是 `plugin/` 目录这个纯 client 插件包，**不发布核心改动**（rc.6 已含）。
+- 形态对标第三方插件仓库 [zhu1090093659/dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui)
+  （`@linxin666/dsh-web-ui-all` 全家桶）：scope 包名 + `dsh.bundle.patch` + profile 树解析运行时依赖，
+  不改 dsh 源码。
 
 ## 包结构（`plugin/`）
 
@@ -27,16 +30,18 @@ plugin/
 
 | 字段 | 作用 |
 | --- | --- |
+| `name: "@tangzai/..."` | scope 包名（scope = npm 用户名 `tangzai`，发布需 `npm login` 此账号） |
 | `dsh.bundle.patch` | `dsh plugin add` 据此识别 bundle 并加入 profile 层列表 |
 | `dsh.client` | client manifest，`platform` 必须为 `"web"` |
 | `exports["./client"]` | `dsh-client-modules` 扫描浏览器 bundle 的硬要求 |
 | `cordis.patch.yml` | 顶层 `- insert:` 追加插件行（`name` 必须等于包名） |
-| `peerDependencies` | 全部写死 `^0.1.0-rc.6`（npm 不认 `workspace:` 协议） |
+| `peerDependencies` | 只声明 `react`；`@deepseek-ai/*` 全在 `devDependencies`（运行时由 profile 树解析，避免 ERESOLVE；同 dsh-web-ui 模式） |
+| `scripts.prepare` | git 方式安装（`dsh plugin add link:` / git+https）时自动构建 |
 | `keywords` + `description` | npm 搜索索引依据 |
 
 ## 发布步骤
 
-前置：本机有 Node.js ≥ 20 与 pnpm；有一个 npm 账号（`npm login`）。
+前置：本机有 Node.js ≥ 20 与 pnpm；npm 账号 `tangzai` 已 `npm login`。
 
 ```bash
 # 1. 安装依赖（plugin/ 独立于 monorepo，无 pnpm-workspace.yaml 干扰）
@@ -51,22 +56,27 @@ pnpm run typecheck
 pnpm pack --dry-run
 #    确认包含：lib/、cordis.patch.yml、README.md、LICENSE
 
-# 4. 发布
+# 4. 发布（scope 包必须 --access public）
 npm publish --access public     # 或 pnpm publish --access public
 ```
 
-发布后自测安装：
+发布后自测安装（用一个测试 profile，或就在 web profile 上）：
 
 ```bash
-dsh plugin add dsh-ui-archive-manager     # 任意测试 profile
+dsh plugin --profile web add @tangzai/dsh-ui-archive-manager
 # 重启该 profile → 设置 → 归档管理
 ```
+
+> **新发布版本被装到旧版？** pnpm 11+ 的发布年龄门禁（`minimumReleaseAge`）会静默隔离
+> 10 天内的新版本。解决办法：在 profile 的 `pnpm-workspace.yaml` 设置 `minimumReleaseAge: 0`，
+> 或把 `@tangzai/*` 加进 `minimumReleaseAgeExclude`，再 `dsh plugin --profile web update @tangzai/dsh-ui-archive-manager`。
+> （同 dsh-web-ui [issue #71](https://github.com/zhu1090093659/dsh-web-ui/issues/71) 的坑。）
 
 ## 让"搜索到"最大化
 
 npm 侧（已配置在 package.json，发布即生效）：
 
-- 包名 `dsh-ui-archive-manager` 含 `dsh` + `archive` 关键词；
+- 包名 `@tangzai/dsh-ui-archive-manager` 含 `dsh` + `archive` 关键词；
 - `description` 首句含 "DeepSeek Harness (dsh)" 与功能词；
 - `keywords` 覆盖 `dsh / deepseek-harness / plugin / archive / unarchive / 归档`。
 
@@ -79,15 +89,25 @@ GitHub 侧（仓库 `Neumannzc/dsh-archive-manager`）：
 其他渠道（可选）：
 
 - 在 dsh 官方仓库的 Discussion 发帖介绍；
+- 在 dsh-web-ui 这类第三方生态的插件清单里提交收录（如 `docs/plugins.md`）；
 - 如果出现社区插件列表/市场，提交收录（当前 rc.6 无内置插件市场）。
 
 ## 维护策略
 
-- **上游同步**：官方 rc.6 → rc.7+ 时，把 `peerDependencies` 的 `^0.1.0-rc.6` 放宽/升级，
+- **上游同步**：官方 rc.6 → rc.7+ 时，把 `devDependencies` 的 `^0.1.0-rc.6` 放宽/升级，
   并重新 diff 官方 `dsh-client-ui-archive-manager` 源码，把新的官方修复合入本包源码。
 - **版本节奏**：`0.x` 阶段用 `pnpm version patch/minor` 管理，发布后用 `pnpm version` 打 tag。
-- **包名冲突**：npm 上已存在 `dsh-archive-manager`（他人同名项目，`latest 1.0.0`）。
-  本包名 `dsh-ui-archive-manager` 当前未被占用；若未来被占，可改用 `@<你的scope>/dsh-ui-archive-manager`。
+- **scope 名**：`@tangzai` 是你的 npm 账号，天然独占；无需担心无 scope 包名被抢注。
+
+## 如果以后有多个插件：聚合包模式（参考 dsh-web-ui-all）
+
+单个插件不需要聚合包。若以后新增插件（皮肤、面板等），照 dsh-web-ui 的模式：
+
+1. 每个功能插件一个独立 npm 包（`@tangzai/dsh-xxx`），各自带 `cordis.patch.yml` 与 `dsh.bundle.patch`；
+2. 建一个聚合包 `@tangzai/dsh-web-ui-all`（或类似名）：`dependencies` 全部用 `workspace:*` 引用
+   功能包，`cordis.patch.yml` 里为每个功能包写一条 `- insert:`（行 id 用独立命名空间前缀）；
+3. 发布必须用 **`pnpm publish`**（自动把 `workspace:*` 改写为真实版本号；`npm publish` 不改写），
+   按依赖顺序发布：功能包 → 聚合包。
 
 ## 备选路线（未采用，可后续做）
 

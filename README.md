@@ -5,7 +5,7 @@ DeepSeek Harness（dsh）的一次功能开发交付：在 **设置 → 归档�
 > **开源发布**：本仓库已公开于 https://github.com/Neumannzc/dsh-archive-manager 。
 > 该功能（含核心 `workspace.unarchiveSession` RPC）已在官方 dsh `0.1.0-rc.6` 中发布；
 > 本仓库的独立增量（视觉美化 + 相对时间）以独立插件包形式发布在 [`plugin/`](plugin/README.md)，
-> 安装方式 `dsh plugin add dsh-ui-archive-manager`。完整发布与搜索优化步骤见 [PUBLISHING.md](PUBLISHING.md)。
+> 安装方式 `dsh plugin --profile web add @tangzai/dsh-ui-archive-manager`。完整发布与搜索优化步骤见 [PUBLISHING.md](PUBLISHING.md)。
 
 ## 功能
 

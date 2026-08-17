@@ -1,5 +1,5 @@
 {
-  "name": "dsh-ui-archive-manager",
+  "name": "@tangzai/dsh-ui-archive-manager",
   "description": "Beautified archive manager for DeepSeek Harness (dsh): a settings section listing archived sessions grouped by workspace, each with an unarchive action, with a flat session list, folder group headers, relative timestamps and hover unarchive buttons.",
   "version": "0.1.0",
   "license": "MIT",
@@ -56,16 +56,13 @@
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.client.json && tsdown",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json --noEmit",
-    "prepublishOnly": "pnpm run build"
+    "prepare": "pnpm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Neumannzc/dsh-archive-manager.git"
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-client-locale": "^0.1.0-rc.6",
-    "@deepseek-ai/dsh-client-runtime": "^0.1.0-rc.6",
-    "@deepseek-ai/dsh-client-ui-primitives": "^0.1.0-rc.6",
-    "@deepseek-ai/dsh-client-ui-settings": "^0.1.0-rc.6",
-    "@deepseek-ai/dsh-client-ui-slots": "^0.1.0-rc.6",
-    "@deepseek-ai/dsh-invariants": "^0.1.0-rc.6",
-    "@deepseek-ai/cordis": "^4.0.1",
     "react": "^18.2.0"
   },
   "devDependencies": {

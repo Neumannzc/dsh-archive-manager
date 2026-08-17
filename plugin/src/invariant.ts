@@ -1,16 +1,16 @@
 /**
- * Package-owned invariant companion for `dsh-ui-archive-manager`.
- * @module dsh-ui-archive-manager/invariant
+ * Package-owned invariant companion for `@tangzai/dsh-ui-archive-manager`.
+ * @module @tangzai/dsh-ui-archive-manager/invariant
  */
 
 /* jscpd:ignore-start */
 import type { Context } from '@deepseek-ai/cordis'
 import type { InvariantInstaller } from '@deepseek-ai/dsh-invariants'
 
-const PACKAGE_NAME = 'dsh-ui-archive-manager'
+const PACKAGE_NAME = '@tangzai/dsh-ui-archive-manager'
 
 /** Cordis companion plugin name. */
-export const name = 'dsh-ui-archive-manager-invariant'
+export const name = 'tangzai-dsh-ui-archive-manager-invariant'
 /** Service required before the companion can reserve package ownership. */
 export const inject = ['invariants']
 
