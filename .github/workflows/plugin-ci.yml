@@ -1,0 +1,33 @@
+name: plugin-ci
+
+on:
+  push:
+    paths:
+      - 'plugin/**'
+  pull_request:
+    paths:
+      - 'plugin/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: plugin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: plugin/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Typecheck
+        run: pnpm run typecheck
+      - name: Build (node half + client bundle)
+        run: pnpm run build
+      - name: Pack dry-run
+        run: pnpm pack --dry-run
