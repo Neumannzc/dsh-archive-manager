@@ -17,6 +17,7 @@
 ```
 plugin/
 ├── package.json          # dsh.bundle.patch + dsh.client 声明、exports["./client"]、keywords
+├── .npmrc                # @tangzai scope 发布走官方 registry（见"Registry"小节）
 ├── cordis.patch.yml      # insert 行（id: ui-archive-manager-beautified）
 ├── tsconfig.json         # node half（src/index.ts、src/invariant.ts → lib/）
 ├── tsconfig.client.json  # client 类型声明（→ lib/types/client/）
@@ -43,6 +44,33 @@ plugin/
 
 前置：本机有 Node.js ≥ 20 与 pnpm；npm 账号 `tangzai` 已 `npm login`。
 
+### Registry：本机镜像源 vs 官方源
+
+本机 `~/.npmrc` 的默认源是 `https://registry.npmmirror.com/`（国内镜像，**只读，不能发布**）。
+`plugin/.npmrc` 已加入 scope 级覆盖，**发布 `@tangzai/*` 自动走官方源，日常安装仍走镜像**：
+
+```ini
+# plugin/.npmrc
+@tangzai:registry=https://registry.npmjs.org/
+```
+
+官方源的认证 token（`//registry.npmjs.org/:_authToken=...`）已在你的 `~/.npmrc` 中配置。
+发布前先验证（token 可能过期）：
+
+```bash
+# 确认 scope 指向官方源
+npm config get @tangzai:registry      # 期望 https://registry.npmjs.org/
+
+# 验证官方源连通性与认证（401 = token 过期，需重新登录）
+npm ping --registry https://registry.npmjs.org/
+npm whoami --registry https://registry.npmjs.org/    # 期望 tangzai
+```
+
+若 token 过期：`npm login --registry https://registry.npmjs.org/`（**必须带官方源参数**，
+否则 token 会写到镜像源名下，发布时 401）。
+
+### 发布命令
+
 ```bash
 # 1. 安装依赖（plugin/ 独立于 monorepo，无 pnpm-workspace.yaml 干扰）
 cd plugin
@@ -52,12 +80,15 @@ pnpm install
 pnpm run build
 pnpm run typecheck
 
-# 3. 发布前检查（npm 包内容预览）
+# 3. 发布前检查（npm 包内容预览；--dry-run 不真正发布，可用镜像源预览）
 pnpm pack --dry-run
 #    确认包含：lib/、cordis.patch.yml、README.md、LICENSE
 
-# 4. 发布（scope 包必须 --access public）
+# 4. 发布（scope 包必须 --access public；plugin/.npmrc 已保证走官方源）
 npm publish --access public     # 或 pnpm publish --access public
+
+# 5. 发布后核验（官方源上应能查到）
+npm view @tangzai/dsh-ui-archive-manager version
 ```
 
 发布后自测安装（用一个测试 profile，或就在 web profile 上）：
