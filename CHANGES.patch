@@ -1,0 +1,987 @@
+diff --git a/apps/web/tests/snapshots/agent-preset-authoring/created.expected.md b/apps/web/tests/snapshots/agent-preset-authoring/created.expected.md
+index d82f48d8c1..91a477d8cf 100644
+--- a/apps/web/tests/snapshots/agent-preset-authoring/created.expected.md
++++ b/apps/web/tests/snapshots/agent-preset-authoring/created.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/agent-preset-authoring/damaged.expected.md b/apps/web/tests/snapshots/agent-preset-authoring/damaged.expected.md
+index 0869bd7f3f..a85c3b1064 100644
+--- a/apps/web/tests/snapshots/agent-preset-authoring/damaged.expected.md
++++ b/apps/web/tests/snapshots/agent-preset-authoring/damaged.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/agent-preset-authoring/section.expected.md b/apps/web/tests/snapshots/agent-preset-authoring/section.expected.md
+index c8d983cb34..3810740da6 100644
+--- a/apps/web/tests/snapshots/agent-preset-authoring/section.expected.md
++++ b/apps/web/tests/snapshots/agent-preset-authoring/section.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/models-settings/configured.expected.md b/apps/web/tests/snapshots/models-settings/configured.expected.md
+index 3c3be0922c..15c0c7a390 100644
+--- a/apps/web/tests/snapshots/models-settings/configured.expected.md
++++ b/apps/web/tests/snapshots/models-settings/configured.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/models-settings/declared-edit.expected.md b/apps/web/tests/snapshots/models-settings/declared-edit.expected.md
+index 1d538bcfe4..8f4802882c 100644
+--- a/apps/web/tests/snapshots/models-settings/declared-edit.expected.md
++++ b/apps/web/tests/snapshots/models-settings/declared-edit.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/models-settings/declared.expected.md b/apps/web/tests/snapshots/models-settings/declared.expected.md
+index df48328fd3..ec541cfd79 100644
+--- a/apps/web/tests/snapshots/models-settings/declared.expected.md
++++ b/apps/web/tests/snapshots/models-settings/declared.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/models-settings/empty.expected.md b/apps/web/tests/snapshots/models-settings/empty.expected.md
+index 2c928e2f0d..5b19369696 100644
+--- a/apps/web/tests/snapshots/models-settings/empty.expected.md
++++ b/apps/web/tests/snapshots/models-settings/empty.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/onboarding-deepseek-config/models.expected.md b/apps/web/tests/snapshots/onboarding-deepseek-config/models.expected.md
+index 5ebf0b1456..de885508c3 100644
+--- a/apps/web/tests/snapshots/onboarding-deepseek-config/models.expected.md
++++ b/apps/web/tests/snapshots/onboarding-deepseek-config/models.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/onboarding-usable-provider/dismissed.expected.md b/apps/web/tests/snapshots/onboarding-usable-provider/dismissed.expected.md
+index 809e7880ff..edff438076 100644
+--- a/apps/web/tests/snapshots/onboarding-usable-provider/dismissed.expected.md
++++ b/apps/web/tests/snapshots/onboarding-usable-provider/dismissed.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/plugin-config/section.expected.md b/apps/web/tests/snapshots/plugin-config/section.expected.md
+index 54ac42b4a7..923fe1d98f 100644
+--- a/apps/web/tests/snapshots/plugin-config/section.expected.md
++++ b/apps/web/tests/snapshots/plugin-config/section.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tests/snapshots/settings-chrome/dialog.expected.md b/apps/web/tests/snapshots/settings-chrome/dialog.expected.md
+index 89cff5df3f..7b708e3cc8 100644
+--- a/apps/web/tests/snapshots/settings-chrome/dialog.expected.md
++++ b/apps/web/tests/snapshots/settings-chrome/dialog.expected.md
+@@ -13,6 +13,9 @@
+     - button "Agent 预设":
+       - img
+       - text: Agent 预设
++    - button "归档管理":
++      - img
++      - text: 归档管理
+   - button "打开配置文件"
+   - button "关闭":
+     - img
+diff --git a/apps/web/tsconfig.json b/apps/web/tsconfig.json
+index 6e706c7123..1456585c9b 100644
+--- a/apps/web/tsconfig.json
++++ b/apps/web/tsconfig.json
+@@ -45,6 +45,7 @@
+     "tests/onboarding-usable-provider.e2e.ts",
+     "tests/remote-welcome.e2e.ts",
+     "tests/workspace-management.e2e.ts",
++    "tests/archive-manager.e2e.ts",
+     "tests/replay-round-trip.e2e.ts",
+     "tests/hmr-live.e2e.ts",
+     "tests/seeded-history.e2e.ts",
+diff --git a/packages/bundle/web-app/cordis.patch.yml b/packages/bundle/web-app/cordis.patch.yml
+index b06e63b54f..15fe901459 100644
+--- a/packages/bundle/web-app/cordis.patch.yml
++++ b/packages/bundle/web-app/cordis.patch.yml
+@@ -258,6 +258,11 @@
+     - id: ui-agent-preset
+       name: '@deepseek-ai/dsh-client-ui-agent-preset'
+ 
++    # Archive manager: the 归档管理 settings section listing archived
++    # sessions grouped by workspace, each with an unarchive action.
++    - id: ui-archive-manager
++      name: '@deepseek-ai/dsh-client-ui-archive-manager'
++
+     # Plugin configuration: the host-plane sections a user owns, as expandable
+     # cards. A namespace this deployment does not expose renders nothing.
+     - id: ui-settings-plugins
+diff --git a/packages/bundle/web-app/package.json b/packages/bundle/web-app/package.json
+index ca4709a2a9..263f2e9b46 100644
+--- a/packages/bundle/web-app/package.json
++++ b/packages/bundle/web-app/package.json
+@@ -53,6 +53,7 @@
+     "@deepseek-ai/dsh-client-modules": "workspace:^",
+     "@deepseek-ai/dsh-client-runtime": "workspace:^",
+     "@deepseek-ai/dsh-client-ui-agent-preset": "workspace:^",
++    "@deepseek-ai/dsh-client-ui-archive-manager": "workspace:^",
+     "@deepseek-ai/dsh-client-ui-commands": "workspace:^",
+     "@deepseek-ai/dsh-client-ui-conversation": "workspace:^",
+     "@deepseek-ai/dsh-client-ui-cordis": "workspace:^",
+diff --git a/packages/client/connection/src/client/fixture.ts b/packages/client/connection/src/client/fixture.ts
+index dd0566486e..9bf1f43f5a 100644
+--- a/packages/client/connection/src/client/fixture.ts
++++ b/packages/client/connection/src/client/fixture.ts
+@@ -2694,6 +2694,15 @@ function createFixtureWorld(options: FixtureOptions): FixtureWorld {
+         }
+         return ok(request, { archivedSessionIds: [...archivedSessionIds] })
+       },
++      unarchiveSession: (request) => {
++        const { sessionId } = request.payload
++        const index = archivedSessionIds.indexOf(sessionId)
++        if (index !== -1) {
++          archivedSessionIds.splice(index, 1)
++          emitHost({ type: 'host/archived-sessions-changed', archivedSessionIds: [...archivedSessionIds] })
++        }
++        return ok(request, { archivedSessionIds: [...archivedSessionIds] })
++      },
+     },
+     agentPresets: {
+       // Both trusts appear, because a surface must present a locally authored
+@@ -3105,6 +3114,7 @@ export class FixtureApiClient extends AbstractApiClient {
+       case 'workspace.insertBefore': return this.api.workspace.insertBefore(request)
+       case 'workspace.insertSessionBefore': return this.api.workspace.insertSessionBefore(request)
+       case 'workspace.archiveSession': return this.api.workspace.archiveSession(request)
++      case 'workspace.unarchiveSession': return this.api.workspace.unarchiveSession(request)
+       case 'skill.list': return this.api.skills.list(request)
+       case 'agentPreset.list': return this.api.agentPresets.list(request)
+       case 'agentPreset.select': return this.api.agentPresets.select(request)
+diff --git a/packages/client/connection/tests/fake-api.client.ts b/packages/client/connection/tests/fake-api.client.ts
+index bee4fc0ce0..a92a24801c 100644
+--- a/packages/client/connection/tests/fake-api.client.ts
++++ b/packages/client/connection/tests/fake-api.client.ts
+@@ -167,6 +167,9 @@ export class FakeApiClient implements IApiClient {
+     archiveSession: (payload: unknown) => this.record('workspace.archiveSession', payload, Promise.resolve(ok({
+       archivedSessionIds: [(payload as { sessionId: SessionId }).sessionId],
+     }))),
++    unarchiveSession: (payload: unknown) => this.record('workspace.unarchiveSession', payload, Promise.resolve(ok({
++      archivedSessionIds: [(payload as { sessionId: SessionId }).sessionId],
++    }))),
+   }
+ 
+   // Payloads stay `unknown` (lint-lane note above); response rows are the real
+diff --git a/packages/client/runtime/src/client/contract/workspaces.ts b/packages/client/runtime/src/client/contract/workspaces.ts
+index 4012086c3d..4a0a3b2ca1 100644
+--- a/packages/client/runtime/src/client/contract/workspaces.ts
++++ b/packages/client/runtime/src/client/contract/workspaces.ts
+@@ -91,4 +91,10 @@ export interface IWorkspaces {
+    * @param sessionId - session to archive.
+    */
+   archiveSession(sessionId: SessionId): Promise<void>
++  /**
++   * Remove a session from the registry-global archive set: it reappears on
++   * every grouping surface at its retained accounting slot.
++   * @param sessionId - session to unarchive.
++   */
++  unarchiveSession(sessionId: SessionId): Promise<void>
+ }
+diff --git a/packages/client/runtime/src/client/workspaces/manager.ts b/packages/client/runtime/src/client/workspaces/manager.ts
+index 9b54dbb429..2944bd1ab3 100644
+--- a/packages/client/runtime/src/client/workspaces/manager.ts
++++ b/packages/client/runtime/src/client/workspaces/manager.ts
+@@ -231,6 +231,18 @@ export class WorkspaceManager {
+     return result
+   }
+ 
++  /**
++   * Remove one session from the registry-global set, then install the
++   * returned full set without waiting for the changed frame.
++   * @param sessionId - session to unarchive.
++   * @returns the wire result.
++   */
++  async unarchiveSession(sessionId: SessionId): Promise<RpcResult<{ archivedSessionIds: SessionId[] }>> {
++    const { result } = await this.api.workspace.unarchiveSession({ sessionId })
++    if (result.ok) this.installArchived(result.value.archivedSessionIds)
++    return result
++  }
++
+   /**
+    * Host-frame entry. Non-workspace frames are ignored so the runtime can
+    * fan one host stream out to both object managers.
+diff --git a/packages/client/runtime/src/client/workspaces/service.ts b/packages/client/runtime/src/client/workspaces/service.ts
+index c23e3b3a6c..a503496aee 100644
+--- a/packages/client/runtime/src/client/workspaces/service.ts
++++ b/packages/client/runtime/src/client/workspaces/service.ts
+@@ -292,6 +292,16 @@ export class WorkspaceRuntime implements IWorkspaces {
+     if (!result.ok) throw new Error(`session archive failed: ${result.error.code}: ${result.error.message}`)
+   }
+ 
++  /**
++   * Remove a session from the registry-global archive set: it reappears on
++   * every grouping surface at its retained accounting slot.
++   * @param sessionId - session to unarchive.
++   */
++  async unarchiveSession(sessionId: SessionId): Promise<void> {
++    const result = await this.manager.unarchiveSession(sessionId)
++    if (!result.ok) throw new Error(`session unarchive failed: ${result.error.code}: ${result.error.message}`)
++  }
++
+   /**
+    * Move a session within its Workspace's manual order (DOM-insertBefore-like).
+    * @param workspaceId - owning workspace.
+diff --git a/packages/client/runtime/tests/fake-api.client.ts b/packages/client/runtime/tests/fake-api.client.ts
+index 33a0efbbfd..158b048888 100644
+--- a/packages/client/runtime/tests/fake-api.client.ts
++++ b/packages/client/runtime/tests/fake-api.client.ts
+@@ -204,6 +204,9 @@ export class FakeApiClient implements IApiClient {
+   onWorkspaceArchiveSession: (payload: unknown) => Promise<RpcResponse<{ archivedSessionIds: SessionId[] }>> =
+     payload => Promise.resolve(ok({ archivedSessionIds: [(payload as { sessionId: SessionId }).sessionId] }))
+ 
++  onWorkspaceUnarchiveSession: (payload: unknown) => Promise<RpcResponse<{ archivedSessionIds: SessionId[] }>> =
++    payload => Promise.resolve(ok({ archivedSessionIds: [(payload as { sessionId: SessionId }).sessionId] }))
++
+   readonly workspace: IApiClient['workspace'] = {
+     list: (payload: unknown) => this.record('workspace.list', payload, this.onWorkspaceList(payload).then(response => (
+       response.result.ok
+@@ -219,6 +222,8 @@ export class FakeApiClient implements IApiClient {
+       this.record('workspace.insertSessionBefore', payload, this.onWorkspaceInsertSessionBefore(payload)),
+     archiveSession: (payload: unknown) =>
+       this.record('workspace.archiveSession', payload, this.onWorkspaceArchiveSession(payload)),
++    unarchiveSession: (payload: unknown) =>
++      this.record('workspace.unarchiveSession', payload, this.onWorkspaceUnarchiveSession(payload)),
+   }
+ 
+   // Payloads stay `unknown` (lint-lane note above); response rows are the real
+diff --git a/packages/client/runtime/tests/workspaces-service.client.spec.ts b/packages/client/runtime/tests/workspaces-service.client.spec.ts
+index cfdfa98e9b..014138aa98 100644
+--- a/packages/client/runtime/tests/workspaces-service.client.spec.ts
++++ b/packages/client/runtime/tests/workspaces-service.client.spec.ts
+@@ -488,6 +488,38 @@ describe('WorkspaceRuntime', () => {
+     expect(workspaces.list.getSnapshot().archivedSessionIds).toEqual(['s-open'])
+   })
+ 
++  it('unarchives a session, projects the set from the response, and leaves a failure untouched', async () => {
++    const ctx = new Context()
++    const api = new FakeApiClient()
++    const sessions = new SessionRuntime(ctx, api, fakeRemote())
++    const workspaces = new WorkspaceRuntime(ctx, api, sessions)
++    api.onList = () => Promise.resolve(ok({
++      items: [
++        { sessionId: sid('s-open'), updatedAt: 2, running: false, blank: false },
++        { sessionId: sid('s-idle'), updatedAt: 1, running: false, blank: false },
++      ],
++    }) as never)
++    api.onWorkspaceList = () => Promise.resolve(ok({
++      items: [], archivedSessionIds: [sid('s-idle'), sid('s-open')],
++    }) as never)
++    await Promise.all([sessions.refresh(), workspaces.refresh()])
++    await Promise.resolve()
++    expect(workspaces.list.getSnapshot().archivedSessionIds).toEqual(['s-idle', 's-open'])
++
++    // Unarchiving installs the unary echo: the set shrinks immediately.
++    api.onWorkspaceUnarchiveSession = () => Promise.resolve(ok({ archivedSessionIds: [sid('s-open')] }))
++    await expect(workspaces.unarchiveSession(sid('s-idle'))).resolves.toBeUndefined()
++    expect(api.callsOf('workspace.unarchiveSession')).toEqual([{ sessionId: 's-idle' }])
++    expect(workspaces.list.getSnapshot().archivedSessionIds).toEqual(['s-open'])
++
++    // A Host failure leaves the set untouched.
++    api.onWorkspaceUnarchiveSession = () => Promise.resolve(err({
++      code: 'internal', message: 'unarchive failed', details: {},
++    }))
++    await expect(workspaces.unarchiveSession(sid('ghost'))).rejects.toThrow(/internal/)
++    expect(workspaces.list.getSnapshot().archivedSessionIds).toEqual(['s-open'])
++  })
++
+   it('clears a current archived by a remote frame and shields the set from a stale in-flight baseline', async () => {
+     const ctx = new Context()
+     const api = new FakeApiClient()
+diff --git a/packages/client/ui-settings-general/src/client/SettingsRoot.tsx b/packages/client/ui-settings-general/src/client/SettingsRoot.tsx
+index 762747500d..e25fcfab69 100644
+--- a/packages/client/ui-settings-general/src/client/SettingsRoot.tsx
++++ b/packages/client/ui-settings-general/src/client/SettingsRoot.tsx
+@@ -13,7 +13,7 @@
+ import { useCallback, useEffect, useId, useRef, useState } from 'react'
+ import clsx from 'clsx'
+ import {
+-  IconAgentPresetOutline16, IconCloseOutline16, IconDataOutline16,
++  IconAgentPresetOutline16, IconArchiveOutline20, IconCloseOutline16, IconDataOutline16,
+   IconPersonalizationOutline16, IconSettingsOutline16,
+ } from '@deepseek-ai/dsh-client-ui-primitives'
+ import type { SettingsRootComponentProps, SettingsSectionRow } from './shell-contract.ts'
+@@ -24,6 +24,7 @@ function navIcon(id: string) {
+   if (id === 'models') return <IconDataOutline16 className={css.navIcon} size={16} />
+   if (id === 'agent-presets') return <IconAgentPresetOutline16 className={css.navIcon} size={16} />
+   if (id === 'plugins') return <IconPersonalizationOutline16 className={css.navIcon} size={16} />
++  if (id === 'archives') return <IconArchiveOutline20 className={css.navIcon} size={16} />
+   return <IconSettingsOutline16 className={css.navIcon} size={16} />
+ }
+ 
+diff --git a/packages/client/ui-settings-general/tests/settings-root.client.spec.tsx b/packages/client/ui-settings-general/tests/settings-root.client.spec.tsx
+index c9ec593974..5fef1938ec 100644
+--- a/packages/client/ui-settings-general/tests/settings-root.client.spec.tsx
++++ b/packages/client/ui-settings-general/tests/settings-root.client.spec.tsx
+@@ -177,19 +177,20 @@ describe('SettingsPanel navigation', () => {
+         { id: 'models', order: 10, label: 'Models' },
+         { id: 'agent-presets', order: 20, label: 'Agent presets' },
+         { id: 'plugins', order: 30, label: 'Plugins' },
+-        { id: 'contributed', order: 40, label: 'Contributed' },
++        { id: 'archives', order: 40, label: 'Archives' },
++        { id: 'contributed', order: 50, label: 'Contributed' },
+       ],
+     })
+     openPanel()
+     // Glyphs carry no id of their own, so the drawn paths are what tells them apart.
+-    const glyphs = ['General', 'Models', 'Agent presets', 'Plugins', 'Contributed']
++    const glyphs = ['General', 'Models', 'Agent presets', 'Plugins', 'Archives', 'Contributed']
+       .map(name => screen.getByRole('button', { name }).querySelector('svg')?.innerHTML)
+ 
+     expect(glyphs.every(glyph => glyph !== undefined && glyph !== '')).toBe(true)
+-    // The three ids the shell names get their own glyph; every other section —
++    // The four ids the shell names get their own glyph; every other section —
+     // including one this package never heard of — shares the gear.
+-    expect(new Set(glyphs.slice(0, 4)).size).toBe(4)
+-    expect(glyphs[4]).toBe(glyphs[0])
++    expect(new Set(glyphs.slice(0, 5)).size).toBe(5)
++    expect(glyphs[5]).toBe(glyphs[0])
+   })
+ 
+   it('switches the rendered section on nav click', () => {
+diff --git a/packages/client/ui-workspace/README.i18n.yaml b/packages/client/ui-workspace/README.i18n.yaml
+index 6d5eff023b..6e9a43a6e5 100644
+--- a/packages/client/ui-workspace/README.i18n.yaml
++++ b/packages/client/ui-workspace/README.i18n.yaml
+@@ -2,5 +2,5 @@
+ # side as of the last confirmed-consistent state. Both languages carry equal authority;
+ # after editing either side, bring the other along and re-record with:
+ #   pnpm run verify-translation-pairing --write packages/client/ui-workspace/README.md
+-README.md: 8878aa49dcccd60ddcde5f0a9563bbfbd969c9c0
+-README.zh.md: c83f1c53d5471dd8d52b933163a573eb98a70c2e
++README.md: 5a510dc4087c243da358836c4369cd47d61ac074
++README.zh.md: eb66118bc3a232fd825aca837cd8af7c29b26f17
+diff --git a/packages/client/ui-workspace/README.md b/packages/client/ui-workspace/README.md
+index 8878aa49dc..5a510dc408 100644
+--- a/packages/client/ui-workspace/README.md
++++ b/packages/client/ui-workspace/README.md
+@@ -31,6 +31,6 @@ None; this package neither assembles nor sends a provider request.
+ ## Known Limitations and Deferred Work
+ 
+ - **No fuzzy content search or event deep links** — the content backend uses literal token/phrase matching, and selecting a result opens the Session rather than the matching event.
+-- **No Session deletion or unarchive control** — sessions can be archived, but archived sessions have no viewing or unarchive surface, and Workspace registration deletion does not delete Sessions.
++- **No Session deletion or re-archive control** — archived sessions are viewed and restored from the separate 归档管理 settings section (ui-archive-manager); this browser offers no delete and no re-archive gesture, and Workspace registration deletion does not delete Sessions.
+ - **Pending user interaction is not aggregated into collapsed groups** — a waiting row inside a collapsed group lights no group-header indicator and becomes visible only after that group is expanded.
+ - **Native folder selection depends on the local Host carrier** — under the `-native` composition, in-process or remote browser deployments cannot open a local operating-system dialog; platform failures are shown in a retryable modal. Remote-capable picking is the `-browse` composition's in-app flow.
+diff --git a/packages/client/ui-workspace/README.zh.md b/packages/client/ui-workspace/README.zh.md
+index c83f1c53d5..eb66118bc3 100644
+--- a/packages/client/ui-workspace/README.zh.md
++++ b/packages/client/ui-workspace/README.zh.md
+@@ -31,6 +31,6 @@ Session 行渲染运行时的实时 `pendingInteraction` 分类：审批显示**
+ ## 已知限制与暂缓事项
+ 
+ - **没有模糊内容搜索或事件深链接**：内容后端采用字面 token／短语匹配，选择结果会打开 Session，而不是匹配的事件。
+-- **没有 Session 删除与取消归档控件**：会话可以归档，但已归档会话没有查看或取消归档入口；删除 Workspace 注册记录不会删除 Session。
++- **没有 Session 删除与重新归档控件**：归档会话在独立的“归档管理”设置页（ui-archive-manager）中查看与恢复；本浏览器不提供删除，也不提供重新归档操作；删除 Workspace 注册记录不会删除 Session。
+ - **待处理的用户交互不会聚合到折叠的分组上**：折叠分组内正在等待的行不会点亮分组头指示，只有展开该分组后才可见。
+ - **原生文件夹选择依赖本地 Host 载体**：在 `-native` 组合下，进程内部署或远程浏览器部署无法打开本地操作系统对话框；模态框会显示平台故障，并允许重试。可远程的选取是 `-browse` 组合的应用内流程。
+diff --git a/packages/host/apiproxy/README.i18n.yaml b/packages/host/apiproxy/README.i18n.yaml
+index 2ae197d230..8457de907a 100644
+--- a/packages/host/apiproxy/README.i18n.yaml
++++ b/packages/host/apiproxy/README.i18n.yaml
+@@ -2,5 +2,5 @@
+ # side as of the last confirmed-consistent state. Both languages carry equal authority;
+ # after editing either side, bring the other along and re-record with:
+ #   pnpm run verify-translation-pairing --write packages/host/apiproxy/README.md
+-README.md: b7dee9488c1b123172c225d4d4235bdb3c76911d
+-README.zh.md: 46835a84254c4bbc45300a18d29aae5a6ac66f14
++README.md: cc6c5ddfa24735db05f7fbf60036baa79bf252c8
++README.zh.md: bf57fff31ed5e6acdcc16db7b771bebfe25750a1
+diff --git a/packages/host/apiproxy/README.md b/packages/host/apiproxy/README.md
+index b7dee9488c..cc6c5ddfa2 100644
+--- a/packages/host/apiproxy/README.md
++++ b/packages/host/apiproxy/README.md
+@@ -42,7 +42,7 @@ Pending queued input is a live control-plane contract, not conversation history.
+ 
+ Background jobs ride the same live-push posture. When `ctx.jobs` is composed, the gateway subscribes to its change feed and broadcasts a whole `session/jobs` snapshot after every registry commit that alters what a session can see — registration, the stopping transition, settlement, and owner-disposal removal — plus a subscription baseline for each session that already has tasks (an absent baseline is the empty set; a change that empties a set still sends `[]`). A change carrying an owner reads through that exact `Agent`, so a push stays correct while its scope tears down; the baseline reads `ctx.agents.get(sessionId)`, which yields only unowned tasks for a session with no live Agent and never resumes a cold one. An unowned change fans out to every subscribed session, because unowned tasks are visible to every caller. The wire `JobView` drops `ownerSession`, `reported`, and `outputLimitBytes`: the frame's own `sessionId` carries the first, and the other two are internal notice and model-presentation policy. A composition without the registry emits no such frames.
+ 
+-Workspace and Session lists are separate reconnect baselines. `workspace.create({ path })` adopts an existing canonical directory and permits basename-derived titles to repeat. `workspace.insertBefore({ workspaceId, beforeWorkspaceId? })` commits one registry-order move and answers the complete order; a pure reorder emits `host/workspace-order-changed` with that complete order, while unknown sources or anchors return `workspace-not-found`. `workspace.delete` removes only the Workspace registration, `session.create` accepts an optional preallocated Session id, and `host/workspace-changed`, `host/workspace-removed`, plus `host/session-added` carry committed increments in either arrival order. `workspace.archiveSession` adds one session to the registry-global archive set and answers the full updated set; `workspace.list` carries that set as the reconnect baseline and `host/archived-sessions-changed` pushes the full snapshot after every durable change. Archiving hides the session from grouping surfaces without touching its log or its workspace account; a session neither live nor persisted fails with `session-not-found`. Registration deletion preserves the directory and session logs; its Sessions remain in `session.list` and become Ungrouped. `SessionSummary.blank` and the `host/session-added` frame carry whether a turn has started: clients hide blank sessions and reuse them per workspace, flip blank on the first `host/session-status(running:true)`, and treat `session.list` as the reconnect authority. Attached summaries fold the live log. A cold summary trusts cached `blank: false`, but treats cached `true` and a cache miss as unverified; when `locate()` reports an artifact no larger than the `coldBlankProbeMaxBytes` eligibility threshold (default 1 KiB), the gateway reads that Session with `readFrom()` and folds both blankness and the latest human prompt. A larger, location-less, vanished, or unreadable artifact remains visible. After an asynchronous cold read, a Session that attached meanwhile is summarized from its live log instead. `updatedAt` uses the live fold, the exact small-artifact fold, or the projection cache in that order, falling back to `createdAt`; pickup boundaries and other writes never promote a Session.
++Workspace and Session lists are separate reconnect baselines. `workspace.create({ path })` adopts an existing canonical directory and permits basename-derived titles to repeat. `workspace.insertBefore({ workspaceId, beforeWorkspaceId? })` commits one registry-order move and answers the complete order; a pure reorder emits `host/workspace-order-changed` with that complete order, while unknown sources or anchors return `workspace-not-found`. `workspace.delete` removes only the Workspace registration, `session.create` accepts an optional preallocated Session id, and `host/workspace-changed`, `host/workspace-removed`, plus `host/session-added` carry committed increments in either arrival order. `workspace.archiveSession` adds one session to the registry-global archive set and answers the full updated set; `workspace.unarchiveSession` removes one id from that set and answers the same full snapshot; `workspace.list` carries the set as the reconnect baseline and `host/archived-sessions-changed` pushes the full snapshot after every durable change. Archiving hides the session from grouping surfaces without touching its log or its workspace account; a session neither live nor persisted fails with `session-not-found`. Registration deletion preserves the directory and session logs; its Sessions remain in `session.list` and become Ungrouped. `SessionSummary.blank` and the `host/session-added` frame carry whether a turn has started: clients hide blank sessions and reuse them per workspace, flip blank on the first `host/session-status(running:true)`, and treat `session.list` as the reconnect authority. Attached summaries fold the live log. A cold summary trusts cached `blank: false`, but treats cached `true` and a cache miss as unverified; when `locate()` reports an artifact no larger than the `coldBlankProbeMaxBytes` eligibility threshold (default 1 KiB), the gateway reads that Session with `readFrom()` and folds both blankness and the latest human prompt. A larger, location-less, vanished, or unreadable artifact remains visible. After an asynchronous cold read, a Session that attached meanwhile is summarized from its live log instead. `updatedAt` uses the live fold, the exact small-artifact fold, or the projection cache in that order, falling back to `createdAt`; pickup boundaries and other writes never promote a Session.
+ 
+ `session.search` is a bounded content-search projection over the sessions visible through `session.list`. The gateway asks the optional `ctx.sessionQuery` service for globally ranked current-surface user, assistant, and steering matches, consumes that stream until it has at most 20 visible session/snippet pairs plus one lookahead, and revalidates every hit against the list-derived authorization set before returning it. Provider pages start at 20 hits; when a first-page request rejects that limit, the gateway probes 10, 5, 2, then 1 and retains the learned size for continuation and stale-generation restarts. Returned snippets contain at most 240 Unicode code points, and the response schema independently enforces that bound at each client boundary. Keeping the authorization set in Host memory avoids SQLite's variable ceiling for large valid corpora without weakening visibility or ranking.
+ 
+diff --git a/packages/host/apiproxy/README.zh.md b/packages/host/apiproxy/README.zh.md
+index 46835a8425..bf57fff31e 100644
+--- a/packages/host/apiproxy/README.zh.md
++++ b/packages/host/apiproxy/README.zh.md
+@@ -42,7 +42,7 @@ Settings 分节中的 `reasoningEffort` 在 agent-default-model 插件配置中
+ 
+ 后台任务沿用同一种实时推送姿态。当组合中有 `ctx.jobs` 时，网关订阅它的变更订阅，并在注册表每一次改变某个会话可见内容的提交后——注册、转入 stopping、结算，以及 owner 销毁时的移除——广播一份完整的 `session/jobs` 快照，另外为每个已经有任务的会话发送订阅 baseline（没有 baseline 即表示空集；把集合清空的那次变更仍然发送 `[]`）。带 owner 的变更通过那个确切的 `Agent` 读取，因此推送在其 scope 拆除期间依然正确；baseline 读 `ctx.agents.get(sessionId)`，对没有活体 Agent 的会话只得到无主任务，且绝不恢复冷会话。无主变更向每一个已订阅会话扇出，因为无主任务对所有调用方可见。线路上的 `JobView` 丢弃 `ownerSession`、`reported` 和 `outputLimitBytes`：第一个由帧自身的 `sessionId` 携带，另外两个分别是内部通知位和模型呈现策略。没有该注册表的组合不发出这类帧。
+ 
+-Workspace 列表与 Session 列表是相互独立的重连基线。`workspace.create({ path })` 会接纳已有的规范目录，并允许由 basename 派生的标题重复。`workspace.insertBefore({ workspaceId, beforeWorkspaceId? })` 提交一次注册表顺序移动并应答完整顺序；单纯重排序会通过 `host/workspace-order-changed` 推送同一份完整顺序，而未知来源或锚点返回 `workspace-not-found`。`workspace.delete` 只移除 Workspace 注册记录，`session.create` 接受可选的预分配 Session id，`host/workspace-changed`、`host/workspace-removed` 与 `host/session-added` 则以任意到达顺序携带已提交的增量。`workspace.archiveSession` 向注册表级全局归档集合添加一个会话，并应答完整的更新后集合；`workspace.list` 携带该集合作为重连基线，`host/archived-sessions-changed` 在每次持久变更后推送完整快照。归档只把会话从各分组视图中隐藏，不触碰其日志和 workspace 记账；既非活动会话也未持久化的会话以 `session-not-found` 失败。删除注册记录会保留目录和会话日志；相关 Session 仍留在 `session.list` 中，并进入 Ungrouped。`SessionSummary.blank` 与 `host/session-added` 帧携带是否已开始过轮次：客户端隐藏空白会话并按 workspace 复用它们，在首个 `host/session-status(running:true)` 时翻转 blank，并以 `session.list` 作为重连权威。已附加摘要折叠实时日志。冷摘要信任缓存的 `blank: false`，但把缓存的 `true` 与 cache miss 都视为未经验证；当 `locate()` 报告的工件不大于 `coldBlankProbeMaxBytes` 资格阈值（默认 1 KiB）时，网关通过 `readFrom()` 读取该 Session，同时折叠空白状态与最新真人 prompt。更大、无位置、已消失或不可读的工件保持可见。异步冷读取结束后，期间已附加的 Session 会改用实时日志生成摘要。`updatedAt` 依次采用实时折叠、小工件精确折叠或 projection cache，缺失时回退到 `createdAt`；拾起边界及其他写入都不会提升 Session 排序。
++Workspace 列表与 Session 列表是相互独立的重连基线。`workspace.create({ path })` 会接纳已有的规范目录，并允许由 basename 派生的标题重复。`workspace.insertBefore({ workspaceId, beforeWorkspaceId? })` 提交一次注册表顺序移动并应答完整顺序；单纯重排序会通过 `host/workspace-order-changed` 推送同一份完整顺序，而未知来源或锚点返回 `workspace-not-found`。`workspace.delete` 只移除 Workspace 注册记录，`session.create` 接受可选的预分配 Session id，`host/workspace-changed`、`host/workspace-removed` 与 `host/session-added` 则以任意到达顺序携带已提交的增量。`workspace.archiveSession` 向注册表级全局归档集合添加一个会话，并应答完整的更新后集合；`workspace.unarchiveSession` 从该集合移除一个 id，并应答同一份完整快照；`workspace.list` 携带该集合作为重连基线，`host/archived-sessions-changed` 在每次持久变更后推送完整快照。归档只把会话从各分组视图中隐藏，不触碰其日志和 workspace 记账；既非活动会话也未持久化的会话以 `session-not-found` 失败。删除注册记录会保留目录和会话日志；相关 Session 仍留在 `session.list` 中，并进入 Ungrouped。`SessionSummary.blank` 与 `host/session-added` 帧携带是否已开始过轮次：客户端隐藏空白会话并按 workspace 复用它们，在首个 `host/session-status(running:true)` 时翻转 blank，并以 `session.list` 作为重连权威。已附加摘要折叠实时日志。冷摘要信任缓存的 `blank: false`，但把缓存的 `true` 与 cache miss 都视为未经验证；当 `locate()` 报告的工件不大于 `coldBlankProbeMaxBytes` 资格阈值（默认 1 KiB）时，网关通过 `readFrom()` 读取该 Session，同时折叠空白状态与最新真人 prompt。更大、无位置、已消失或不可读的工件保持可见。异步冷读取结束后，期间已附加的 Session 会改用实时日志生成摘要。`updatedAt` 依次采用实时折叠、小工件精确折叠或 projection cache，缺失时回退到 `createdAt`；拾起边界及其他写入都不会提升 Session 排序。
+ 
+ `session.search` 是以 `session.list` 所列会话为范围的有界内容搜索投影。网关向可选的 `ctx.sessionQuery` 服务请求全局排序后的当前内容视图中的 user、assistant 和 steering 匹配项，并持续消费该结果流，直到获得至多 20 个可见会话／snippet 对及一个前瞻项；返回前仍会依据从列表推导的授权集合重新校验每个命中。提供方分页初始请求 20 个命中；如果第一页请求因这一上限被拒绝，网关会依次探测 10、5、2、1，并在续传和陈旧世代重启中沿用探测所得的页面大小。返回的 snippet 最多包含 240 个 Unicode 码点，响应 schema 则会在每个客户端边界独立强制执行该上限。将授权集合保留在宿主内存中，可在不削弱可见性或排序的前提下避开有效大型语料库的 SQLite 变量上限。
+ 
+diff --git a/packages/host/apiproxy/src/api-proxy.ts b/packages/host/apiproxy/src/api-proxy.ts
+index bda99362b6..ace0d63b23 100644
+--- a/packages/host/apiproxy/src/api-proxy.ts
++++ b/packages/host/apiproxy/src/api-proxy.ts
+@@ -2918,6 +2918,12 @@ export function createApiProxy(ctx: Context, defaults: ApiProxyDefaults): ApiPro
+         }
+         return ok(request, { archivedSessionIds: [...ctx.workspaceRegistry.archivedSessionIds] })
+       },
++
++      async unarchiveSession(request) {
++        const { sessionId } = request.payload
++        await ctx.workspaceRegistry.unarchiveSession(sessionId)
++        return ok(request, { archivedSessionIds: [...ctx.workspaceRegistry.archivedSessionIds] })
++      },
+     },
+ 
+     host: {
+diff --git a/packages/host/apiproxy/src/api/rpc-map.ts b/packages/host/apiproxy/src/api/rpc-map.ts
+index 80dede1799..06a3cd543d 100644
+--- a/packages/host/apiproxy/src/api/rpc-map.ts
++++ b/packages/host/apiproxy/src/api/rpc-map.ts
+@@ -50,6 +50,7 @@ export interface RpcMethodMap {
+   'workspace.insertBefore': WorkspaceApi['insertBefore']
+   'workspace.insertSessionBefore': WorkspaceApi['insertSessionBefore']
+   'workspace.archiveSession': WorkspaceApi['archiveSession']
++  'workspace.unarchiveSession': WorkspaceApi['unarchiveSession']
+   'skill.list': SkillsApi['list']
+   'agentPreset.list': AgentPresetsApi['list']
+   'agentPreset.select': AgentPresetsApi['select']
+diff --git a/packages/host/apiproxy/src/api/workspace.schema.ts b/packages/host/apiproxy/src/api/workspace.schema.ts
+index b57305141c..0f139687db 100644
+--- a/packages/host/apiproxy/src/api/workspace.schema.ts
++++ b/packages/host/apiproxy/src/api/workspace.schema.ts
+@@ -98,3 +98,13 @@ export const workspaceArchiveSessionRequestSchema = z.object({
+ export const workspaceArchiveSessionValueSchema = z.object({
+   archivedSessionIds: z.array(sessionIdSchema),
+ }) satisfies z.ZodType<Wire<ResponseValue<'workspace.archiveSession'>>>
++
++/** workspace.unarchiveSession request payload. */
++export const workspaceUnarchiveSessionRequestSchema = z.object({
++  sessionId: sessionIdSchema,
++}) satisfies z.ZodType<Wire<RequestPayload<'workspace.unarchiveSession'>>>
++
++/** workspace.unarchiveSession response value: the full updated archive set. */
++export const workspaceUnarchiveSessionValueSchema = z.object({
++  archivedSessionIds: z.array(sessionIdSchema),
++}) satisfies z.ZodType<Wire<ResponseValue<'workspace.unarchiveSession'>>>
+diff --git a/packages/host/apiproxy/src/api/workspace.ts b/packages/host/apiproxy/src/api/workspace.ts
+index d36d0c406e..d1c7fc2324 100644
+--- a/packages/host/apiproxy/src/api/workspace.ts
++++ b/packages/host/apiproxy/src/api/workspace.ts
+@@ -106,4 +106,13 @@ export interface WorkspaceApi {
+    */
+   archiveSession(request: RpcRequest<{ sessionId: SessionId }>):
+   Promise<RpcResponse<{ archivedSessionIds: SessionId[] }>>
++
++  /**
++   * Removes one session from the registry-global archive set: the session
++   * reappears on every grouping surface at its retained accounting slot.
++   * Idempotent for an id already absent from the set. Returns the full
++   * updated set (same snapshot the changed frame carries).
++   */
++  unarchiveSession(request: RpcRequest<{ sessionId: SessionId }>):
++  Promise<RpcResponse<{ archivedSessionIds: SessionId[] }>>
+ }
+diff --git a/packages/host/apiproxy/src/fetch/client.ts b/packages/host/apiproxy/src/fetch/client.ts
+index 70e3ece58f..3818969818 100644
+--- a/packages/host/apiproxy/src/fetch/client.ts
++++ b/packages/host/apiproxy/src/fetch/client.ts
+@@ -39,6 +39,7 @@ import {
+   workspaceInsertSessionBeforeValueSchema,
+   workspaceListValueSchema,
+   workspaceRenameValueSchema,
++  workspaceUnarchiveSessionValueSchema,
+ } from '../api/workspace.schema.ts'
+ import { skillListValueSchema } from '../api/skills.schema.ts'
+ import {
+@@ -120,6 +121,7 @@ export interface IApiClient {
+     insertBefore(payload: RequestPayload<'workspace.insertBefore'>, signal?: AbortSignal): Promise<RpcResponse<ResponseValue<'workspace.insertBefore'>>>
+     insertSessionBefore(payload: RequestPayload<'workspace.insertSessionBefore'>, signal?: AbortSignal): Promise<RpcResponse<ResponseValue<'workspace.insertSessionBefore'>>>
+     archiveSession(payload: RequestPayload<'workspace.archiveSession'>, signal?: AbortSignal): Promise<RpcResponse<ResponseValue<'workspace.archiveSession'>>>
++    unarchiveSession(payload: RequestPayload<'workspace.unarchiveSession'>, signal?: AbortSignal): Promise<RpcResponse<ResponseValue<'workspace.unarchiveSession'>>>
+   }
+   skills: {
+     list(payload: RequestPayload<'skill.list'>, signal?: AbortSignal): Promise<RpcResponse<ResponseValue<'skill.list'>>>
+@@ -198,6 +200,7 @@ const UNARY_VALUE_SCHEMAS: { [K in keyof RpcMethodMap]: z.ZodType<Wire<ResponseV
+   'workspace.insertBefore': workspaceInsertBeforeValueSchema,
+   'workspace.insertSessionBefore': workspaceInsertSessionBeforeValueSchema,
+   'workspace.archiveSession': workspaceArchiveSessionValueSchema,
++  'workspace.unarchiveSession': workspaceUnarchiveSessionValueSchema,
+   'skill.list': skillListValueSchema,
+   'agentPreset.list': agentPresetListValueSchema,
+   'agentPreset.select': agentPresetSelectValueSchema,
+@@ -451,6 +454,7 @@ export abstract class AbstractApiClient implements IApiClient {
+     insertBefore: (payload, signal) => this.callUnary('workspace.insertBefore', payload, signal),
+     insertSessionBefore: (payload, signal) => this.callUnary('workspace.insertSessionBefore', payload, signal),
+     archiveSession: (payload, signal) => this.callUnary('workspace.archiveSession', payload, signal),
++    unarchiveSession: (payload, signal) => this.callUnary('workspace.unarchiveSession', payload, signal),
+   }
+ 
+   readonly skills: IApiClient['skills'] = {
+diff --git a/packages/host/apiproxy/src/fetch/handler.ts b/packages/host/apiproxy/src/fetch/handler.ts
+index 697171ec53..ec015560cd 100644
+--- a/packages/host/apiproxy/src/fetch/handler.ts
++++ b/packages/host/apiproxy/src/fetch/handler.ts
+@@ -42,6 +42,7 @@ import {
+   workspaceInsertSessionBeforeRequestSchema,
+   workspaceListRequestSchema,
+   workspaceRenameRequestSchema,
++  workspaceUnarchiveSessionRequestSchema,
+ } from '../api/workspace.schema.ts'
+ import { skillListRequestSchema } from '../api/skills.schema.ts'
+ import {
+@@ -116,6 +117,7 @@ const UNARY_ROUTES: UnaryRoutes = {
+   'workspace.insertBefore': { schema: workspaceInsertBeforeRequestSchema, invoke: (api, r) => api.workspace.insertBefore(r) },
+   'workspace.insertSessionBefore': { schema: workspaceInsertSessionBeforeRequestSchema, invoke: (api, r) => api.workspace.insertSessionBefore(r) },
+   'workspace.archiveSession': { schema: workspaceArchiveSessionRequestSchema, invoke: (api, r) => api.workspace.archiveSession(r) },
++  'workspace.unarchiveSession': { schema: workspaceUnarchiveSessionRequestSchema, invoke: (api, r) => api.workspace.unarchiveSession(r) },
+   'skill.list': { schema: skillListRequestSchema, invoke: (api, r) => api.skills.list(r) },
+   'agentPreset.list': { schema: agentPresetListRequestSchema, invoke: (api, r) => api.agentPresets.list(r) },
+   'agentPreset.select': { schema: agentPresetSelectRequestSchema, invoke: (api, r) => api.agentPresets.select(r) },
+diff --git a/packages/host/apiproxy/tests/api-proxy-workspace.spec.ts b/packages/host/apiproxy/tests/api-proxy-workspace.spec.ts
+index 54bdb015e4..12f51a5162 100644
+--- a/packages/host/apiproxy/tests/api-proxy-workspace.spec.ts
++++ b/packages/host/apiproxy/tests/api-proxy-workspace.spec.ts
+@@ -567,4 +567,44 @@ describe('Host Workspace increments', () => {
+     })
+     abort.abort()
+   })
++
++  it('unarchives a session from the global set, restoring its accounting slot, and streams the set once', async () => {
++    const { api, root } = await harness()
++    const workspace = expectOk(await api.workspace.create(request({ path: stageDir(root, 'unarchive-home') }))).workspace
++    const first = SessionId('session-to-unarchive')
++    const second = SessionId('session-kept-archived')
++    expectOk(await api.sessions.create(request({ workspaceId: workspace.workspaceId, sessionId: first })))
++    expectOk(await api.sessions.create(request({ workspaceId: workspace.workspaceId, sessionId: second })))
++    expectOk(await api.workspace.archiveSession(request({ sessionId: first })))
++    expectOk(await api.workspace.archiveSession(request({ sessionId: second })))
++    expect(expectOk(await api.workspace.list(request({}))).archivedSessionIds).toEqual([first, second])
++
++    const abort = new AbortController()
++    const stream: AsyncIterator<RpcRequest<HostFrame>> =
++      api.events.host(request({}), abort.signal)[Symbol.asyncIterator]()
++    const changed = nextHostFrame(stream)
++    expect(expectOk(await api.workspace.unarchiveSession(request({ sessionId: first }))).archivedSessionIds)
++      .toEqual([second])
++    expect(await changed).toMatchObject({
++      payload: { type: 'host/archived-sessions-changed', archivedSessionIds: [second] },
++    })
++
++    // Accounting and the session itself are untouched; list re-baselines the set.
++    const listed = expectOk(await api.workspace.list(request({})))
++    expect(listed.archivedSessionIds).toEqual([second])
++    // Attach prepends, so the later-created session leads the account.
++    expect(listed.items[0]?.sessionIds).toEqual([second, first])
++    expect(expectOk(await api.sessions.list(request({}))).items.map(item => item.sessionId))
++      .toEqual(expect.arrayContaining([first, second]))
++
++    // The idempotent repeat emits no second frame: the next observed frame is
++    // the workspace-changed of a later attach, not another archive snapshot.
++    const after = nextHostFrame(stream)
++    expect(expectOk(await api.workspace.unarchiveSession(request({ sessionId: first }))).archivedSessionIds)
++      .toEqual([second])
++    const otherSession = SessionId('session-after-unarchive')
++    expectOk(await api.sessions.create(request({ workspaceId: workspace.workspaceId, sessionId: otherSession })))
++    expect((await after).payload.type).not.toBe('host/archived-sessions-changed')
++    abort.abort()
++  })
+ })
+diff --git a/packages/host/apiproxy/tests/client-handler.spec.ts b/packages/host/apiproxy/tests/client-handler.spec.ts
+index 4130d8f210..082e08b924 100644
+--- a/packages/host/apiproxy/tests/client-handler.spec.ts
++++ b/packages/host/apiproxy/tests/client-handler.spec.ts
+@@ -88,6 +88,7 @@ function scriptedApi(overrides: {
+       insertBefore: r => ok(r, { workspaceIds: [r.payload.workspaceId] }),
+       insertSessionBefore: r => ok(r, { workspace: { workspaceId: 'w1' as never, path: '/t', title: 't', sessionIds: [], createdAt: '0', updatedAt: '0' } }),
+       archiveSession: r => ok(r, { archivedSessionIds: [r.payload.sessionId] }),
++      unarchiveSession: r => ok(r, { archivedSessionIds: [r.payload.sessionId] }),
+     },
+     skills: { list: r => ok(r, { skills: [] }), ...overrides.skills },
+     agentPresets: {
+@@ -433,6 +434,8 @@ describe('workspace domain round trip', () => {
+     if (created.result.ok) expect(created.result.value.created).toBe(true)
+     const archivedResponse = await c.workspace.archiveSession({ sessionId: 's-arch' as never })
+     expect(archivedResponse.result).toEqual({ ok: true, value: { archivedSessionIds: ['s-arch'] } })
++    const unarchivedResponse = await c.workspace.unarchiveSession({ sessionId: 's-arch' as never })
++    expect(unarchivedResponse.result).toEqual({ ok: true, value: { archivedSessionIds: ['s-arch'] } })
+   })
+ 
+   it('rejects a pathless create payload at the handler schema', async () => {
+diff --git a/packages/host/apiproxy/tests/fetch-carrier.spec.ts b/packages/host/apiproxy/tests/fetch-carrier.spec.ts
+index 2000f708ba..e1af92a437 100644
+--- a/packages/host/apiproxy/tests/fetch-carrier.spec.ts
++++ b/packages/host/apiproxy/tests/fetch-carrier.spec.ts
+@@ -191,6 +191,9 @@ function fakeApi(overrides: Partial<{ muxFrames: MuxFrame[]; hostFrames: HostFra
+       async archiveSession(request) {
+         return { rpcId: request.rpcId, result: { ok: true, value: { archivedSessionIds: [request.payload.sessionId] } } }
+       },
++      async unarchiveSession(request) {
++        return { rpcId: request.rpcId, result: { ok: true, value: { archivedSessionIds: [request.payload.sessionId] } } }
++      },
+     },
+     agentPresets: {
+       list(request: RpcRequest<{}>) {
+diff --git a/packages/host/apiproxy/tests/rpc-schemas.spec.ts b/packages/host/apiproxy/tests/rpc-schemas.spec.ts
+index 66ae52f783..7b86cb50e4 100644
+--- a/packages/host/apiproxy/tests/rpc-schemas.spec.ts
++++ b/packages/host/apiproxy/tests/rpc-schemas.spec.ts
+@@ -26,7 +26,9 @@ import {
+   workspaceInsertBeforeRequestSchema, workspaceInsertBeforeValueSchema,
+   workspaceInsertSessionBeforeRequestSchema, workspaceInsertSessionBeforeValueSchema,
+   workspaceListRequestSchema, workspaceListValueSchema,
+-  workspaceRenameRequestSchema, workspaceRenameValueSchema, workspaceViewSchema,
++  workspaceRenameRequestSchema, workspaceRenameValueSchema,
++  workspaceUnarchiveSessionRequestSchema, workspaceUnarchiveSessionValueSchema,
++  workspaceViewSchema,
+ } from '../src/api/workspace.schema.ts'
+ import { skillEntrySchema, skillListRequestSchema, skillListValueSchema } from '../src/api/skills.schema.ts'
+ import {
+@@ -368,6 +370,14 @@ describe('workspace domain schemas', () => {
+     expect(() => workspaceArchiveSessionValueSchema.parse({ archivedSessionIds: 's1' })).toThrow()
+   })
+ 
++  it('unarchiveSession request/value carry the id and the full updated set', () => {
++    expect(workspaceUnarchiveSessionRequestSchema.parse({ sessionId: 's1' }).sessionId).toBe('s1')
++    expect(() => workspaceUnarchiveSessionRequestSchema.parse({})).toThrow()
++    expect(workspaceUnarchiveSessionValueSchema.parse({ archivedSessionIds: ['s1', 's2'] }).archivedSessionIds)
++      .toEqual(['s1', 's2'])
++    expect(() => workspaceUnarchiveSessionValueSchema.parse({ archivedSessionIds: 's1' })).toThrow()
++  })
++
+   it('insertSessionBefore accepts an anchored and an anchorless move', () => {
+     expect(workspaceInsertSessionBeforeRequestSchema.parse({ workspaceId: 'w1', sessionId: 's1', beforeSessionId: 's2' }).beforeSessionId).toBe('s2')
+     expect(workspaceInsertSessionBeforeRequestSchema.parse({ workspaceId: 'w1', sessionId: 's1' }).beforeSessionId).toBeUndefined()
+diff --git a/packages/test-support/client-runtime/src/workspaces.ts b/packages/test-support/client-runtime/src/workspaces.ts
+index 4f6b2122cb..4bc7f8ece3 100644
+--- a/packages/test-support/client-runtime/src/workspaces.ts
++++ b/packages/test-support/client-runtime/src/workspaces.ts
+@@ -212,4 +212,21 @@ export class TestWorkspaces implements IWorkspaces {
+       draft.archivedSessionIds = [...draft.archivedSessionIds, sessionId]
+     })
+   }
++
++  /**
++   * Unarchive a session (recorded). The default mirrors the production face's
++   * observable effect: the id leaves the list state's archive set.
++   * @param sessionId - session to unarchive.
++   */
++  async unarchiveSession(sessionId: SessionId): Promise<void> {
++    this.calls.push({ method: 'unarchiveSession', args: [sessionId] })
++    const stub = this.stubs.get('unarchiveSession')
++    if (stub !== undefined) {
++      await (stub(sessionId) as Promise<void>)
++      return
++    }
++    await this.update((draft) => {
++      draft.archivedSessionIds = draft.archivedSessionIds.filter(id => id !== sessionId)
++    })
++  }
+ }
+diff --git a/packages/workspace/workspace/README.i18n.yaml b/packages/workspace/workspace/README.i18n.yaml
+index 20f5d3b867..7d978f3c55 100644
+--- a/packages/workspace/workspace/README.i18n.yaml
++++ b/packages/workspace/workspace/README.i18n.yaml
+@@ -2,5 +2,5 @@
+ # side as of the last confirmed-consistent state. Both languages carry equal authority;
+ # after editing either side, bring the other along and re-record with:
+ #   pnpm run verify-translation-pairing --write packages/workspace/workspace/README.md
+-README.md: c1c4309efdc85f4bc7a6b0f128df6d9f4f810ae1
+-README.zh.md: f44ad04be0c63061200a256c5ce8cb24a4d3c54b
++README.md: ad27dfd76da6f632b75fa5654a2dd39eeecfe0ed
++README.zh.md: 491511866a0ff2288ebc924f7cf9dd6ef91d0e61
+diff --git a/packages/workspace/workspace/README.md b/packages/workspace/workspace/README.md
+index c1c4309efd..ad27dfd76d 100644
+--- a/packages/workspace/workspace/README.md
++++ b/packages/workspace/workspace/README.md
+@@ -14,7 +14,7 @@ The entity/storage rationale lives in the [domain Agent Note](../../../.agents/n
+ - `ctx.workspaceRegistry.delete(id)` — removes only the Workspace registration, its durable order entry, and its session account. Unknown ids return `false`; a removed record returns `true`. The directory, user files, live Sessions, and persisted session logs are never touched, so those Sessions become Ungrouped. A table-write failure restores the prior order and published entity.
+ - `Workspace.attachSession(id)` — validates a live or persisted session header cwd against the workspace path and prepends a new id. Unknown sessions, absent/unresolvable/non-directory cwd values, and mismatches reject without writing. `detachSession` removes only the candidate index entry.
+ - `Workspace.insertSessionBefore(id, before?)` — moves an accounted session within the manual order, DOM-insertBefore-like: before the anchor, or appended when the anchor is omitted. A session or anchor absent from the account rejects without writing; a move to the current position resolves without writing. Registry Workspace order never changes.
+-- `ctx.workspaceRegistry.archiveSession(id)` / `archivedSessionIds` — the registry-global archive set, layered over workspace accounting: an archived session disappears from grouping surfaces but keeps its session log and its `sessionIds` slot, so a future unarchive restores its position. Archiving accepts any live or persisted session (accounted or Ungrouped), resolves without writing for an already archived id, and rejects an unknown id. State written before the field existed parses with an empty set.
++- `ctx.workspaceRegistry.archiveSession(id)` / `unarchiveSession(id)` / `archivedSessionIds` — the registry-global archive set, layered over workspace accounting: an archived session disappears from grouping surfaces but keeps its session log and its `sessionIds` slot, so unarchiving restores its position. Archiving accepts any live or persisted session (accounted or Ungrouped), resolves without writing for an already archived id, and rejects an unknown id. Unarchiving removes the id from the set and resolves without writing for an id already absent. State written before the field existed parses with an empty set.
+ - `Workspace.sessionIds` — synchronous id-plus-canonical-cwd membership projection in durable candidate order. Missing headers, invalid cwd values, and mismatches are filtered; the next workspace mutation prunes them. A medium indexing one session under two workspaces, claiming one path from two records, or diverging from durable workspace order rejects at startup.
+ - `Workspace.status()` — uncached directory check, `'ok' | 'missing-dir'`; a missing directory never mutates the record.
+ 
+diff --git a/packages/workspace/workspace/README.zh.md b/packages/workspace/workspace/README.zh.md
+index f44ad04be0..491511866a 100644
+--- a/packages/workspace/workspace/README.zh.md
++++ b/packages/workspace/workspace/README.zh.md
+@@ -14,7 +14,7 @@ DeepSeek Harness 的 Workspace 实体注册表（`ctx.workspaceRegistry`）：
+ - `ctx.workspaceRegistry.delete(id)`：只移除 Workspace 注册记录、对应的持久顺序条目及会话归属记录。未知 id 返回 `false`，成功移除记录则返回 `true`。目录、用户文件、活跃会话和持久化会话日志绝不受影响，因此相关会话会进入 Ungrouped。表写入失败时会恢复原顺序和此前发布的实体。
+ - `Workspace.attachSession(id)`：对照 workspace 路径验证实时或已持久化的会话头 cwd，并将新 id 前置。未知会话、缺失／无法解析／非目录的 cwd 值和不匹配情况都会在不写入的前提下被拒绝。`detachSession` 只移除候选索引条目。
+ - `Workspace.insertSessionBefore(id, before?)`：在手动顺序内移动一个已记账的会话，语义类似 DOM 的 insertBefore：插到锚点之前，省略锚点则追加到末尾。会话或锚点不在记账中时拒绝且不写入；移动到当前位置时直接完成且不写入。注册表中的 Workspace 顺序绝不改变。
+-- `ctx.workspaceRegistry.archiveSession(id)`/`archivedSessionIds`：覆盖在 workspace 记账之上的注册表级全局归档集合：被归档的会话从各分组视图中消失，但其会话日志和 `sessionIds` 席位保持不变，未来取消归档时可恢复原位置。归档接受任何实时或已持久化的会话（无论已记账还是 Ungrouped），对已归档的 id 直接完成而不写入，并拒绝未知 id。在该字段出现之前写入的状态解析为一个空集合。
++- `ctx.workspaceRegistry.archiveSession(id)`/`unarchiveSession(id)`/`archivedSessionIds`：覆盖在 workspace 记账之上的注册表级全局归档集合：被归档的会话从各分组视图中消失，但其会话日志和 `sessionIds` 席位保持不变，取消归档即可恢复原位置。归档接受任何实时或已持久化的会话（无论已记账还是 Ungrouped），对已归档的 id 直接完成而不写入，并拒绝未知 id；取消归档把 id 移出集合，对已不在集合中的 id 直接完成而不写入。在该字段出现之前写入的状态解析为一个空集合。
+ - `Workspace.sessionIds`：按持久候选顺序提供同步 id 加规范 cwd 成员投影。缺失头部、无效 cwd 值和不匹配情况都被过滤；下一次 workspace 变更会剪除它们。如果同一存储介质将一个会话索引到两个 workspace 下、用两条记录声明同一路径，或偏离持久 workspace 顺序，启动会被拒绝。
+ - `Workspace.status()`：未缓存的目录检查，返回 `'ok' | 'missing-dir'`；目录缺失绝不会改动记录。
+ 
+diff --git a/packages/workspace/workspace/src/index.ts b/packages/workspace/workspace/src/index.ts
+index 87edb28cad..5b39ef378c 100644
+--- a/packages/workspace/workspace/src/index.ts
++++ b/packages/workspace/workspace/src/index.ts
+@@ -254,6 +254,25 @@ export class WorkspaceRegistry extends Service {
+     })
+   }
+ 
++  /**
++   * Remove one session from the registry-global archive set, restoring its
++   * appearance on every grouping surface at its retained accounting slot
++   * (archiving never touched that slot). An id absent from the set resolves
++   * without writing.
++   * @param sessionId - The session to unarchive.
++   * @returns resolution after durability.
++   */
++  unarchiveSession(sessionId: SessionId): Promise<void> {
++    return this.enqueueOperation(async () => {
++      const state = this.requireState()
++      if (!state.archivedSessionIds.includes(sessionId)) return
++      await this.setState({
++        ...state,
++        archivedSessionIds: state.archivedSessionIds.filter(id => id !== sessionId),
++      })
++    })
++  }
++
+   /**
+    * Whether a session is live, header-indexed, or present in a fresh
+    * persistence listing. Only a definite miss returns false — a failing
+diff --git a/packages/workspace/workspace/tests/workspace.spec.ts b/packages/workspace/workspace/tests/workspace.spec.ts
+index 22900c7649..a85f07c33b 100644
+--- a/packages/workspace/workspace/tests/workspace.spec.ts
++++ b/packages/workspace/workspace/tests/workspace.spec.ts
+@@ -921,6 +921,30 @@ describe('registry-global session archive', () => {
+     expect(storedState(result.pool).archivedSessionIds).toEqual([])
+   })
+ 
++  it('unarchives durably in order, idempotently skips absent ids, and leaves accounting untouched', async () => {
++    const dir = await makeDir('unarchive-home')
++    const result = await harness({ sessions: [header('kept', dir, 100), header('gone', dir, 200)] })
++    const workspace = result.registry.list()[0]!
++    await result.registry.archiveSession(SessionId('gone'))
++    await result.registry.archiveSession(SessionId('kept'))
++    expect(result.registry.archivedSessionIds).toEqual(['gone', 'kept'])
++
++    await result.registry.unarchiveSession(SessionId('gone'))
++    expect(result.registry.archivedSessionIds).toEqual(['kept'])
++    // Unarchiving is a display-set write: the workspace account keeps the id.
++    expect(workspace.sessionIds).toContain('gone')
++    expect(storedState(result.pool).archivedSessionIds).toEqual(['kept'])
++    const changesAfterFirst = result.changes.filter(change => change.table === '').length
++
++    await result.registry.unarchiveSession(SessionId('gone'))
++    expect(result.registry.archivedSessionIds).toEqual(['kept'])
++    // The idempotent repeat neither rewrites the medium nor emits a change.
++    expect(result.changes.filter(change => change.table === '').length).toBe(changesAfterFirst)
++
++    await result.registry.unarchiveSession(SessionId('kept'))
++    expect(result.registry.archivedSessionIds).toEqual([])
++  })
++
+   it('restores the archive set across restarts and defaults it for pre-field media', async () => {
+     const dir = await makeDir('archive-restart')
+     const pool = new MemoryMediaPool()
+@@ -930,8 +954,14 @@ describe('registry-global session archive', () => {
+ 
+     const second = await harness({ pool, sessions: [header('s1', dir, 100)] })
+     expect(second.registry.archivedSessionIds).toEqual(['s1'])
++    await second.registry.unarchiveSession(SessionId('s1'))
++    expect(second.registry.archivedSessionIds).toEqual([])
+     await second.fiber.dispose()
+ 
++    const third = await harness({ pool, sessions: [header('s1', dir, 100)] })
++    expect(third.registry.archivedSessionIds).toEqual([])
++    await third.fiber.dispose()
++
+     // A medium written before the field existed parses through the schema default.
+     const legacyId = WorkspaceId('00000000-0000-4000-8000-00000000000a')
+     const legacy = storedPool(
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 1490a0f9f7..f73ad9d3b9 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -1285,6 +1285,9 @@ importers:
+       '@deepseek-ai/dsh-client-ui-agent-preset':
+         specifier: workspace:^
+         version: link:../../client/ui-agent-preset
++      '@deepseek-ai/dsh-client-ui-archive-manager':
++        specifier: workspace:^
++        version: link:../../client/ui-archive-manager
+       '@deepseek-ai/dsh-client-ui-commands':
+         specifier: workspace:^
+         version: link:../../client/ui-commands
+@@ -1697,6 +1700,42 @@ importers:
+         specifier: ^18.2.0
+         version: 18.3.1
+ 
++  packages/client/ui-archive-manager:
++    devDependencies:
++      '@deepseek-ai/cordis':
++        specifier: workspace:^
++        version: link:../../../vendor/cordis
++      '@deepseek-ai/dsh-client-locale':
++        specifier: workspace:^
++        version: link:../locale
++      '@deepseek-ai/dsh-client-runtime':
++        specifier: workspace:^
++        version: link:../runtime
++      '@deepseek-ai/dsh-client-test-runtime':
++        specifier: workspace:^
++        version: link:../../test-support/client-runtime
++      '@deepseek-ai/dsh-client-ui-primitives':
++        specifier: workspace:^
++        version: link:../ui-primitives
++      '@deepseek-ai/dsh-client-ui-settings':
++        specifier: workspace:^
++        version: link:../ui-settings
++      '@deepseek-ai/dsh-client-ui-slots':
++        specifier: workspace:^
++        version: link:../ui-slots
++      '@deepseek-ai/dsh-client-web-react':
++        specifier: workspace:^
++        version: link:../web-react
++      '@deepseek-ai/dsh-invariants':
++        specifier: workspace:^
++        version: link:../../runtime-diagnostics/invariants
++      '@types/react':
++        specifier: ~18.3.1
++        version: 18.3.31
++      react:
++        specifier: ^18.2.0
++        version: 18.3.1
++
+   packages/client/ui-attachment:
+     dependencies:
+       '@deepseek-ai/dsh-attachment':
+@@ -12953,8 +12992,8 @@ packages:
+   mdn-data@2.27.1:
+     resolution: {integrity: sha512-9Yubnt3e8A0OKwxYSXyhLymGW4sCufcLG6VdiDdUGVkPhpqLxlvP5vl1983gQjJl3tqbrM731mjaZaP68AgosQ==}
+ 
+-  media-typer@1.1.0:
+-    resolution: {integrity: sha512-aisnrDP4GNe06UcKFnV5bfMNPBUw4jsLGaWwWfnH3v02GnBuXX2MCVn5RbrWo0j3pczUilYblq7fQ7Nw2t5XKw==}
++  media-typer@1.1.1:
++    resolution: {integrity: sha512-yz3xRaG20c6/BOzvYoDaGtPmGscs7YivItZEEqe6GbwNfHuxu9YNmvnEkMzKldAGY4/80pRcQRZSEnhquk9XuQ==}
+     engines: {node: '>= 0.8'}
+ 
+   merge-descriptors@2.0.0:
+@@ -18266,7 +18305,7 @@ snapshots:
+ 
+   mdn-data@2.27.1: {}
+ 
+-  media-typer@1.1.0: {}
++  media-typer@1.1.1: {}
+ 
+   merge-descriptors@2.0.0: {}
+ 
+@@ -19371,7 +19410,7 @@ snapshots:
+   type-is@2.1.0:
+     dependencies:
+       content-type: 2.0.0
+-      media-typer: 1.1.0
++      media-typer: 1.1.1
+       mime-types: 3.0.2
+ 
+   typebox@1.1.38: {}
+diff --git a/tsconfig.base.json b/tsconfig.base.json
+index 16d69db6db..61ceb7cb0f 100644
+--- a/tsconfig.base.json
++++ b/tsconfig.base.json
+@@ -204,6 +204,7 @@
+       "@deepseek-ai/dsh-client-ui-goal": ["./packages/client/ui-goal/src"],
+       "@deepseek-ai/dsh-client-ui-message-feedback": ["./packages/client/ui-message-feedback/src"],
+       "@deepseek-ai/dsh-client-ui-agent-preset": ["./packages/client/ui-agent-preset/src"],
++      "@deepseek-ai/dsh-client-ui-archive-manager": ["./packages/client/ui-archive-manager/src"],
+       "@deepseek-ai/dsh-client-ui-permission-presets": ["./packages/client/ui-permission-presets/src"],
+       "@deepseek-ai/dsh-client-ui-skill": ["./packages/client/ui-skill/src"],
+       "@deepseek-ai/dsh-client-ui-subagent": ["./packages/client/ui-subagent/src"],
+diff --git a/tsconfig.client.json b/tsconfig.client.json
+index e599f76f1b..5f02fcf945 100644
+--- a/tsconfig.client.json
++++ b/tsconfig.client.json
+@@ -80,6 +80,7 @@
+     { "path": "./packages/client/ui-message-feedback" },
+     { "path": "./packages/client/ui-model-selection" },
+     { "path": "./packages/client/ui-agent-preset" },
++    { "path": "./packages/client/ui-archive-manager" },
+     { "path": "./packages/client/ui-permission-presets" },
+     { "path": "./packages/client/ui-plan" },
+     { "path": "./packages/client/ui-settings-plugins" },
+diff --git a/tsconfig.host.json b/tsconfig.host.json
+index 459036247a..7468add27c 100644
+--- a/tsconfig.host.json
++++ b/tsconfig.host.json
+@@ -32,6 +32,7 @@
+     "apps/web/tests/onboarding-usable-provider.e2e.ts",
+     "apps/web/tests/remote-welcome.e2e.ts",
+     "apps/web/tests/workspace-management.e2e.ts",
++    "apps/web/tests/archive-manager.e2e.ts",
+     "apps/web/tests/replay-round-trip.e2e.ts",
+     "apps/web/tests/hmr-live.e2e.ts",
+     "apps/web/tests/seeded-history.e2e.ts",
