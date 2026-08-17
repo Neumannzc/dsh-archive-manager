@@ -2,8 +2,13 @@
  * Archive-manager plugin, browser half: one settings section (`settings.section`
  * id `archives`, ordered after the agent-presets page) listing archived
  * sessions grouped by workspace, each row with an unarchive action. The
- * section reads the framework's global useSessions/useWorkspaces feeds, so no
- * store or Host RPC beyond the workspaces service is needed. Export
+ * section reads the framework's global useSessions/useWorkspaces feeds (the
+ * official npm dsh keeps archived sessions in session.list and exposes
+ * `WorkspaceListState.archivedSessionIds`), so no store or Host RPC beyond
+ * those feeds is needed. The unarchive action posts to the host-half HTTP
+ * route (`UNARCHIVE_ROUTE`) — the official npm dsh has no
+ * `workspace.unarchiveSession` RPC (it was briefly published then rolled
+ * back upstream), so the plugin's own node half owns the capability. Export
  * discipline: packages/client/AGENTS.md.
  */
 import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
@@ -18,6 +23,9 @@ import { createArchiveViewStore } from './view-store.ts'
 
 export type { ArchiveManagerSectionInjected, ArchiveManagerSectionProps } from './ArchiveManagerSection.tsx'
 export type { ArchiveManagerKey } from './locales.ts'
+
+/** Host-half route path; same page origin, no CORS involved. */
+const UNARCHIVE_ROUTE = '/dsh-ui-archive-manager/unarchive'
 
 declare module '@deepseek-ai/dsh-client-ui-slots' {
   interface LocaleNamespaceMap {
@@ -34,7 +42,7 @@ const NS = 'settingsArchiveManager'
  * ui-settings' apply, whose activation order relative to this one is NOT
  * constrained; the registration depends on it through `slots.inject()`.
  */
-export const inject = ['slots', 'workspaces', 'locale']
+export const inject = ['slots', 'locale']
 
 /**
  * Register the dictionaries and the settings section once the slot
@@ -44,10 +52,17 @@ export const inject = ['slots', 'workspaces', 'locale']
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-archive-manager: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-ui-archive-manager: dictionaries')
 
   const injected = (): ArchiveManagerSectionInjected => ({
-    unarchive: async (sessionId) => { await ctx.workspaces.unarchiveSession(sessionId) },
+    unarchive: async (sessionId) => {
+      const response = await fetch(UNARCHIVE_ROUTE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: String(sessionId) }),
+      })
+      if (!response.ok) throw new Error(`unarchive failed: HTTP ${response.status}`)
+    },
   })
 
   ctx.slots.inject('settings.section', () => ctx.slots.register({

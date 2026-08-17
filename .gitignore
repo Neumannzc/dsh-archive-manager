@@ -6,6 +6,12 @@ lib/
 dist/
 *.tsbuildinfo
 
+# local package-manager stores / verification artifacts
+.pnpm-store/
+.npm-cache/
+/.t.tgz
+/package/
+
 # logs and temp
 *.log
 .DS_Store

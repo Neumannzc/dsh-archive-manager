@@ -1,19 +1,24 @@
 # @tangzai/dsh-ui-archive-manager
 
-A beautified **archive manager** settings section for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (dsh): a flat list of archived sessions grouped by workspace, each row with a hover **unarchive** button, folder-style group headers, and relative timestamps.
+A beautified **archive manager** settings section for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (dsh): a flat list of archived sessions grouped by workspace, each row with a hover **unarchive** button, folder-style group headers, and relative timestamps (中文/English).
 
-Built on the official `@deepseek-ai/dsh-client-ui-archive-manager` feature (dsh ≥ `0.1.0-rc.6`); this package restyles it and adds relative-time labels (中文/English).
+The package is a **dual-half plugin**: the node half restores the unarchive capability on stock npm dsh (the official `0.1.0-rc.6` ships `archiveSession` but **not** `unarchiveSession` — it was briefly published upstream then rolled back), and the browser half renders the settings section. No core packages are modified.
+
+## How it works
+
+- **Display**: the section reads the framework's own feeds — `useSessions` (archived sessions stay in `session.list`) and `useWorkspaces` (`WorkspaceListState.archivedSessionIds`) — so no custom data plumbing is needed.
+- **Unarchive action**: the browser half POSTs to the plugin's own exact HTTP route on the official `webServer` carrier; the node half patches `WorkspaceRegistry.unarchiveSession` (idempotent — a future official release that adds the method wins) and applies the same durable, queue-serialized state update as the upstream implementation. The change then propagates to every client through the core `archived-sessions-changed` frame.
 
 ## Features
 
 - **设置 → 归档管理** settings page (same `archives` section id as the official plugin).
 - Archived sessions grouped by workspace, mirroring the sidebar grouping rules.
 - Beautified UI: flat session rows, folder group headers, relative timestamps (`3min ago` / `3分钟前`), hover-only unarchive icon button.
-- Works entirely client-side: reads the framework `useSessions`/`useWorkspaces` feeds and calls the core `workspaces.unarchiveSession` service — no host-side logic, no core patches.
+- Trust fence on the unarchive route: loopback or same-origin only; cross-site requests refused.
 
 ## Install
 
-Requires dsh `>= 0.1.0-rc.6` (the core `workspace.unarchiveSession` RPC landed there) and `pnpm`.
+Requires dsh `>= 0.1.0-rc.6` (archived-session feeds and the `webServer` carrier exist there) and `pnpm`.
 
 ```bash
 dsh plugin --profile web add @tangzai/dsh-ui-archive-manager
@@ -27,8 +32,8 @@ Then restart the dsh profile (the plugin row mounts at next boot). Open **设置
 
 | dsh version | status |
 | --- | --- |
-| `>= 0.1.0-rc.6` | supported |
-| `< 0.1.0-rc.6` | not supported (no core unarchive RPC) |
+| `>= 0.1.0-rc.6` (npm) | supported — unarchive provided by this plugin's node half |
+| `< 0.1.0-rc.6` | not supported (no archived-session feeds / webServer carrier) |
 
 ## Development
 

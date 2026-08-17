@@ -4,13 +4,15 @@
 
 ## 现状与定位
 
-- 归档管理功能（含 `workspace.unarchiveSession` 核心 RPC）**已经是官方 dsh `0.1.0-rc.6` 的一部分**；
-  官方 UI 包 `@deepseek-ai/dsh-client-ui-archive-manager` 也已发布。
-- 本仓库的独有增量是**视觉美化 + 相对时间**（3 个文件：`ArchiveManagerSection.tsx` / `.module.css` / `locales.ts`）。
-- 因此独立发布的是 `plugin/` 目录这个纯 client 插件包，**不发布核心改动**（rc.6 已含）。
+- **重要背景**：官方 npm 上的 dsh `0.1.0-rc.6` **不含** `unarchiveSession`（该功能曾在 rc.6 短暂发布后被官方回滚；
+  本机 8/14 装的缓存里还有，官方 registry 当前 tarball 已无）。官方只有 `archiveSession` + 归档数据 feeds。
+- 因此本插件是**双 half**：node half 自带 unarchive 实现（patch `WorkspaceRegistry.unarchiveSession` +
+  在官方 `webServer` 载体上注册 HTTP 路由，remote-web-ui 同款通道）；browser half 渲染美化设置页
+  （显示用官方 `useSessions` / `archivedSessionIds` feeds，动作走插件自己的路由）。
+- 独有增量：**视觉美化 + 相对时间**（3 个 UI 文件）+ **自带 unarchive 能力**（官方缺失，插件补齐）。
+- 零核心改动：全部基于官方公开服务（workspaceRegistry / webServer / archived-sessions-changed 帧）。
 - 形态对标第三方插件仓库 [zhu1090093659/dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui)
-  （`@linxin666/dsh-web-ui-all` 全家桶）：scope 包名 + `dsh.bundle.patch` + profile 树解析运行时依赖，
-  不改 dsh 源码。
+  （`@linxin666/dsh-web-ui-all` 全家桶）：scope 包名 + `dsh.bundle.patch` + profile 树解析运行时依赖。
 
 ## 包结构（`plugin/`）
 
@@ -19,10 +21,10 @@ plugin/
 ├── package.json          # dsh.bundle.patch + dsh.client 声明、exports["./client"]、keywords
 ├── .npmrc                # @tangzai scope 发布走官方 registry（见"Registry"小节）
 ├── cordis.patch.yml      # insert 行（id: ui-archive-manager-beautified）
-├── tsconfig.json         # node half（src/index.ts、src/invariant.ts → lib/）
+├── tsconfig.json         # node half（src/index.ts host 实现、src/invariant.ts → lib/）
 ├── tsconfig.client.json  # client 类型声明（→ lib/types/client/）
 ├── tsdown.config.ts      # client bundle（__ModuleLoader__.load 协议 + CSS Modules 内联）
-├── src/                  # 源码（美化版）
+├── src/                  # 源码（node half：unarchive patch + HTTP 路由；browser half：美化设置页）
 ├── LICENSE               # MIT（保留 DeepSeek 上游版权 + 本项目版权）
 └── README.md             # 安装指引
 ```

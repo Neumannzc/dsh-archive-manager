@@ -13,7 +13,7 @@
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
     "skipLibCheck": true,
-    "types": []
+    "types": ["node"]
   },
   "include": ["src/index.ts", "src/invariant.ts"],
   "exclude": ["src/client"]
