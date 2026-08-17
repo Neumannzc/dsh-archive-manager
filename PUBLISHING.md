@@ -125,6 +125,16 @@ GitHub 侧（仓库 `Neumannzc/dsh-archive-manager`）：
 - 在 dsh-web-ui 这类第三方生态的插件清单里提交收录（如 `docs/plugins.md`）；
 - 如果出现社区插件列表/市场，提交收录（当前 rc.6 无内置插件市场）。
 
+### dshfind.com / awesome-dsh-plugin 收录（已完成）
+
+插件已提交到 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)（dshfind.com 的数据源），
+收录后即可在 https://dshfind.com/zh/plugins 搜索到：
+
+- 提交文件：`data/plugins/Neumannzc__dsh-archive-manager.yml`（本仓库 `docs/awesome-dsh-plugin.yml` 有存档副本）
+- 流程：本地 clone → 新增 YAML → `node scripts/generate-readme.mjs` 重新生成 README → fork + PR
+- **门槛（CI 自动检查）**：仓库创建 ≥ 1 天、GitHub 提交数 ≥ 10、`package.json` 声明 `dsh.bundle`、
+  仓库加 `dsh-plugin` topic。未达标会被自动拒，达标后重新提交即可。
+
 ## 维护策略
 
 - **上游同步**：官方 rc.6 → rc.7+ 时，把 `devDependencies` 的 `^0.1.0-rc.6` 放宽/升级，
