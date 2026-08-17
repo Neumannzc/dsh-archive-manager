@@ -1,49 +1,56 @@
-# dsh-archive-manager — 归档管理（显示归档会话 + 取消归档）
+# dsh-archive-manager
 
-DeepSeek Harness（dsh）的一次功能开发交付：在 **设置 → 归档管理** 页面按工作区展示已归档会话，并支持取消归档。
+A beautified **archive manager** plugin for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (dsh): a **设置 → 归档管理** settings page listing archived sessions grouped by workspace, each row with a hover **unarchive** action and relative timestamps.
 
-> **开源发布**：本仓库已公开于 https://github.com/Neumannzc/dsh-archive-manager 。
-> 该功能（含核心 `workspace.unarchiveSession` RPC）已在官方 dsh `0.1.0-rc.6` 中发布；
-> 本仓库的独立增量（视觉美化 + 相对时间）以独立插件包形式发布在 [`plugin/`](plugin/README.md)，
-> 安装方式 `dsh plugin --profile web add @tangzai/dsh-ui-archive-manager`。完整发布与搜索优化步骤见 [PUBLISHING.md](PUBLISHING.md)。
+[![npm version](https://img.shields.io/npm/v/@tangzai/dsh-ui-archive-manager.svg)](https://www.npmjs.com/package/@tangzai/dsh-ui-archive-manager)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 功能
+**中文简介**：为 DeepSeek Harness（dsh）的 Web 界面提供美化版归档管理设置页——按工作区分组展示已归档会话，悬停取消归档，附相对时间。官方 npm 版 dsh（`0.1.0-rc.6`）只含 `archiveSession`（`unarchiveSession` 曾被短暂发布后回滚），本插件的 node half 自带取消归档实现，无需改动 dsh 核心。
 
-- **设置入口**：设置面板新增「归档管理」页，位于 [通用设置] → [模型] → [插件] → [Agent 预设] 之下（`settings.section` id `archives`，order 25）。
-- **按工作区分组显示归档会话**：与未归档的侧边栏树同一套派生规则——工作区注册表顺序、组内记账顺序、尾部「未分组」桶、排除空白占位与子代理子会话。
-- **取消归档**：每行一个「取消归档」按钮，恢复后会话立即回到侧边栏原分组位置。
-- **持久性**：归档集存储在 workspace domain 全局状态，取消归档跨重启保持；多标签页通过既有 `host/archived-sessions-changed` 帧同步。
+## Features
 
-## 目录结构
+- **设置 → 归档管理** settings page (same `archives` section id as the official plugin).
+- Archived sessions grouped by workspace, mirroring the sidebar grouping rules.
+- Beautified UI: flat session rows, folder group headers, relative timestamps (`3min ago` / `3分钟前`), hover-only unarchive icon button.
+- **Self-contained unarchive**: the plugin's node half patches `WorkspaceRegistry.unarchiveSession` when the official release lacks it (idempotent — a future official method wins) and exposes it to the browser over the official `webServer` carrier; state changes propagate to every tab through the core `archived-sessions-changed` frame.
+- Trust fence on the unarchive route: loopback or same-origin only.
 
-按仓库相对路径排列（`CHANGES.patch` 为已跟踪文件的完整 diff，新增文件已包含在目录中）：
+## Install
 
-```
-packages/workspace/workspace/src/index.ts        Host: WorkspaceRegistry.unarchiveSession
-packages/workspace/workspace/tests/workspace.spec.ts
-packages/host/apiproxy/src/                      API 网关: workspace.unarchiveSession RPC（接口/schema/rpc-map/处理/传输）
-packages/host/apiproxy/tests/
-packages/client/runtime/src/client/workspaces/   Client runtime: workspaces.unarchiveSession 服务
-packages/client/runtime/tests/
-packages/client/connection/src/client/fixture.ts 循环回放 fixture
-packages/test-support/client-runtime/src/workspaces.ts
-packages/client/ui-archive-manager/              新插件包：归档管理设置页（apply/locales/derive/组件/测试/README）
-packages/bundle/web-app/cordis.patch.yml         dsh.client 注册行
-packages/bundle/web-app/package.json             bundle 依赖
-apps/web/tests/archive-manager.e2e.ts            e2e：新建会话→归档→设置页显示→取消归档→reload 持久性
-apps/web/tests/snapshots/*.expected.md           因新增导航行 refresh 的设置页 golden
-.agents/notes/implemented/feature/2026-08-15-archive-manager-settings-section.md  Agent Note（含中文）
-tsconfig.base.json / tsconfig.client.json / tsconfig.host.json / apps/web/tsconfig.json  装配面
+Requires dsh `>= 0.1.0-rc.6` and `pnpm`.
+
+```bash
+dsh plugin --profile web add @tangzai/dsh-ui-archive-manager
 ```
 
-## 验证
+Restart the dsh profile, then open **设置 → 归档管理**.
 
-- 单元：`pnpm run test:gui`（277 文件 / 3774 测试全绿）
-- e2e（零模型调用）：`DSH_E2E_ARCHIVE_WORKSPACE=/home/tang/workspace/tmp pnpm run test:web:built`（该文件独立运行亦可：`pnpm exec vitest run --config vitest.web.config.ts apps/web/tests/archive-manager.e2e.ts`）
-- 其余门禁：knip / publint / constraints / package-invariants / node-next-types / runtime-closure / verify-cordis-config 均通过
+> If your profile also runs the official `@deepseek-ai/dsh-client-ui-archive-manager` row, both sections render — prefer one of them.
 
-## 已知的环境噪音（与本改动无关）
+## Compatibility
 
-- `hmr-live` e2e：本机 chromium 默认中文 locale，测试硬编码英文 hero 文案，预先存在。
-- `rescope-vendor` 门禁：26 个未触碰文件上的既有残留。
-- `/home/tang/project/person/dsh-archive-manager` 仅含源码，不含 node_modules / lib 构建产物。
+| dsh version | status |
+| --- | --- |
+| `>= 0.1.0-rc.6` (npm) | supported — unarchive provided by the plugin's node half |
+| `< 0.1.0-rc.6` | not supported |
+
+## Repository layout
+
+| path | what |
+| --- | --- |
+| `plugin/` | The published npm package ([`@tangzai/dsh-ui-archive-manager`](https://www.npmjs.com/package/@tangzai/dsh-ui-archive-manager)): node half (`src/index.ts`), browser half (`src/client/`), build config, `cordis.patch.yml` |
+| `PUBLISHING.md` | Publish / npm-search / maintenance guide (中文) |
+| `packages/` … `apps/` | The upstream dsh monorepo snapshot this feature was developed in (the archive-manager settings section, incl. `workspace.unarchiveSession` core work, later rolled back upstream) |
+
+## Development
+
+```bash
+cd plugin
+pnpm install
+pnpm run build       # tsc node half + client type declarations + tsdown client bundle
+pnpm run typecheck
+```
+
+## License
+
+MIT — see [LICENSE](./LICENSE). Derived from [deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) (MIT, © DeepSeek).
