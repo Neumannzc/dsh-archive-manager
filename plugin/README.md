@@ -11,10 +11,10 @@ The package is a **dual-half plugin**: the node half restores the unarchive capa
 
 ## Features
 
-- **设置 → 归档管理** settings page (same `archives` section id as the official plugin).
+- **设置 → 归档管理** settings page (plugin-scoped id `archives-beautified`, distinct from any official `archives` id).
 - Archived sessions grouped by workspace, mirroring the sidebar grouping rules.
 - Beautified UI: flat session rows, folder group headers, relative timestamps (`3min ago` / `3分钟前`), hover-only unarchive icon button.
-- Trust fence on the unarchive route: loopback or same-origin only; cross-site requests refused.
+- Trust fence on the unarchive route: mirrors `client-connection`'s `isTrustedApiRequest` — DNS-rebinding defense via a mandatory `Host` fence, cross-site refused, opaque `Origin: null` refused, LAN deployments add their bound authority to the `trustedHosts` list; plus an 8 KiB body-size cap with two-layer defense (Content-Length precheck + streaming byte count).
 
 ## Install
 
@@ -40,7 +40,8 @@ Then restart the dsh profile (the plugin row mounts at next boot). Open **设置
 ```bash
 pnpm install
 pnpm run build     # tsc node half + client type declarations + tsdown client bundle
-pnpm run typecheck
+pnpm run typecheck # tsc on node half, client half, and tests
+pnpm run test      # vitest: derive / relativeTime / locale completeness
 ```
 
 ## Publish (maintainers)

@@ -10,6 +10,7 @@ export const zh = {
   intro: '归档的会话已从工作区列表中隐藏，其会话记录仍然保留。按工作区查看，并将需要恢复的会话取消归档。',
   noArchived: '暂无归档会话',
   'group.ungrouped': '未分组',
+  // 中文无单复数形变；保留 one/other 双键以满足 plural 规则字典接口。
   'sessions.count.one': '{n} 个会话',
   'sessions.count.other': '{n} 个会话',
   unarchive: '取消归档',

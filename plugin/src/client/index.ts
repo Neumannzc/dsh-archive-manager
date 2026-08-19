@@ -1,6 +1,6 @@
 /**
  * Archive-manager plugin, browser half: one settings section (`settings.section`
- * id `archives`, ordered after the agent-presets page) listing archived
+ * id `archives-beautified`, ordered after the agent-presets page) listing archived
  * sessions grouped by workspace, each row with an unarchive action. The
  * section reads the framework's global useSessions/useWorkspaces feeds (the
  * official npm dsh keeps archived sessions in session.list and exposes
@@ -67,7 +67,10 @@ export function apply(ctx: ClientContext): void {
 
   ctx.slots.inject('settings.section', () => ctx.slots.register({
     name: 'settings.section',
-    id: 'archives',
+    // Plugin-scoped id, distinct from the official `archives` section id so
+    // this row coexists with — and is ordered independently of — any official
+    // archive-manager section a profile may also mount.
+    id: 'archives-beautified',
     // Below the agent-presets page (order 20): archiving is a session-lifecycle
     // housekeeping act, not a shaping preference.
     order: 25,

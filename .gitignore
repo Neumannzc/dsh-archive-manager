@@ -11,6 +11,8 @@ dist/
 .npm-cache/
 /.t.tgz
 /package/
+# Local-dev-only pnpm override (see the file's own header for the reason).
+plugin/pnpm-workspace.yaml
 
 # logs and temp
 *.log

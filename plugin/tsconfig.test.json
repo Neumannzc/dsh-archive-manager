@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.client.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "rootDir": ".",
+    "types": ["node"]
+  },
+  "include": [
+    "src/client",
+    "tests",
+    "src/css-modules.d.ts"
+  ],
+  "exclude": []
+}

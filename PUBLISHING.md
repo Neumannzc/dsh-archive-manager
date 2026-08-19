@@ -1,5 +1,7 @@
 # 开源发布指南（@tangzai/dsh-ui-archive-manager）
 
+> 英文版见 [`PUBLISHING.en.md`](./PUBLISHING.en.md)。本文是中文权威版，英文版与之同步更新。
+
 让其他人能**安装**（`dsh plugin --profile web add @tangzai/dsh-ui-archive-manager`）并**搜索到**（npm / GitHub）你的归档管理插件。
 
 ## 现状与定位

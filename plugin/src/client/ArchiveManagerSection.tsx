@@ -18,7 +18,7 @@ import {
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { InjectFace, PropsLocale, PropsRuntime, PropsStore } from '@deepseek-ai/dsh-client-ui-slots'
 import type { createArchiveViewStore } from './view-store.ts'
-import { deriveArchivedGroups, UNGROUPED_KEY, type ArchivedGroupNode } from './derive.ts'
+import { deriveArchivedGroups, relativeTime, UNGROUPED_KEY, type ArchivedGroupNode } from './derive.ts'
 import type { ArchiveManagerKey } from './locales.ts'
 import css from './ArchiveManagerSection.module.css'
 
@@ -34,34 +34,6 @@ export type ArchiveManagerSectionProps =
   & PropsLocale<'settingsArchiveManager'>
   & PropsStore<ReturnType<typeof createArchiveViewStore>>
   & InjectFace<ArchiveManagerSectionInjected>
-
-/** Relative-time bucket for archived session rows. */
-type RelativeTimeUnit = 'now' | 'minutes' | 'hours' | 'days' | 'months' | 'years'
-
-/** Structured relative time: the bucket plus its magnitude (0 for 'now'). */
-interface RelativeTime {
-  unit: RelativeTimeUnit
-  n: number
-}
-
-/**
- * Compact relative time for session rows, matching the sidebar tree pattern.
- * @param updatedAt - epoch ms of the session's last activity.
- * @param now - current epoch ms (injected for pure rendering).
- * @returns the row's trailing time bucket and magnitude.
- */
-function relativeTime(updatedAt: number, now: number): RelativeTime {
-  const MIN = 60_000
-  const HOUR = 3_600_000
-  const DAY = 86_400_000
-  const diff = Math.max(0, now - updatedAt)
-  if (diff < MIN) return { unit: 'now', n: 0 }
-  if (diff < HOUR) return { unit: 'minutes', n: Math.floor(diff / MIN) }
-  if (diff < DAY) return { unit: 'hours', n: Math.floor(diff / HOUR) }
-  if (diff < 30 * DAY) return { unit: 'days', n: Math.floor(diff / DAY) }
-  if (diff < 365 * DAY) return { unit: 'months', n: Math.floor(diff / (30 * DAY)) }
-  return { unit: 'years', n: Math.floor(diff / (365 * DAY)) }
-}
 
 /** Localized compact relative time label. */
 function timeLabel(updatedAt: number, now: number, t: (key: ArchiveManagerKey, params?: Record<string, string | number>) => string): string {

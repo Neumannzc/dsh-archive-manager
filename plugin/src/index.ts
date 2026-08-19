@@ -61,39 +61,127 @@ async function unarchive(registry: WorkspaceRegistry, sessionId: string): Promis
 }
 
 /**
- * Trust fence for the unarchive route, mirroring the connection package's
- * browser-trust semantics (loopback or same-origin; cross-site refused).
+ * Maximum bytes accepted on the unarchive route. The body carries only
+ * `{sessionId: string}`; 8 KiB is well above any plausible id and bounds the
+ * memory the bridge buffers per request, mirroring the upstream
+ * `client-connection` `DEFAULT_MAX_REQUEST_BODY_BYTES` defense but sized for
+ * this single small JSON envelope.
+ */
+const MAX_REQUEST_BODY_BYTES = 8 * 1024
+
+/**
+ * Trusted hosts accepted on the unarchive route besides loopback. Empty by
+ * default — deployments serving over LAN literals (e.g. `192.168.x.x`) must
+ * add the bound authority here. The list follows the upstream
+ * `isTrustedApiRequest(req, trustedHosts)` contract: an entry with an explicit
+ * `:port` matches that exact authority, a port-less entry matches the
+ * hostname on any port.
+ */
+const TRUSTED_HOSTS: readonly string[] = []
+
+/** Normalized URL of a Host-header authority, or undefined when unparsable. */
+function parseHost(authority: string): URL | undefined {
+  try { return new URL(`http://${authority}`) } catch { return undefined }
+}
+
+/**
+ * Loopback classification mirroring upstream `isLoopbackHostname`:
+ * `localhost`, IPv6 loopback, and every IPv4 address in 127/8. Hostnames are
+ * WHATWG-normalized (lowercased), so `LOCALHOST` and bracketed IPv6 literals
+ * `[::1]` match.
+ */
+function isLoopbackHostname(hostname: string): boolean {
+  if (hostname === 'localhost' || hostname === '[::1]') return true
+  const parts = hostname.split('.')
+  return parts.length === 4
+    && parts[0] === '127'
+    && parts.every(part => /^\d{1,3}$/.test(part) && Number(part) <= 255)
+}
+
+/** Whether a Host authority matches a `trustedHosts` entry (port-less matches any port). */
+function isTrustedAuthority(hostUrl: URL, trustedHosts: readonly string[]): boolean {
+  return trustedHosts.some((entry) => {
+    const entryUrl = parseHost(entry)
+    if (entryUrl === undefined) return false
+    return entryUrl.port === ''
+      ? entryUrl.hostname === hostUrl.hostname
+      : entryUrl.host === hostUrl.host
+  })
+}
+
+/**
+ * Trust fence for the unarchive route, mirroring `client-connection`'s
+ * `isTrustedApiRequest`. Two confused-deputy paths a browser opens against a
+ * local HTTP API must be closed: DNS rebinding (the rebound page carries the
+ * attacker's domain in `Host` even though the socket lands on this server)
+ * and cross-site requests fired from a malicious page.
+ *
+ * Order matters: the `Host` fence runs first against every request (no
+ * marker shortcut — a browser read over plain HTTP arrives with neither
+ * `Origin` nor `Fetch-Metadata`, indistinguishable from curl, and its
+ * response is still readable by the rebound page). `sec-fetch-site: cross-site`
+ * is refused outright; an attached `Origin` must equal the Host authority;
+ * the literal `null` (sandboxed iframes, file: pages) is an opaque origin
+ * and also refused; absence of `Origin` is fine because the Host fence above
+ * already bound the request.
+ *
  * The dsh web page loads from this same server, so a same-origin browser
- * request is the normal case; a missing Origin is only accepted from a
- * loopback peer.
+ * request is the normal case; a missing `Origin` is only accepted from a
+ * loopback or trusted peer.
  * @param req - the node HTTP request.
  * @returns true when the request may reach the unarchive handler.
  */
 function isTrustedRequest(req: IncomingMessage): boolean {
   if (req.headers['sec-fetch-site'] === 'cross-site') return false
   const host = req.headers.host
+  if (host === undefined) return false
+  const hostUrl = parseHost(Array.isArray(host) ? host[0]! : host)
+  if (hostUrl === undefined) return false
+  if (!isLoopbackHostname(hostUrl.hostname) && !isTrustedAuthority(hostUrl, TRUSTED_HOSTS)) return false
   const origin = req.headers.origin
-  if (origin !== undefined) {
-    if (typeof host !== 'string') return false
-    try {
-      return new URL(origin).host === new URL(`http://${host}`).host
-    } catch {
-      return false
-    }
+  if (origin === undefined) return true
+  try {
+    const originHost = new URL(origin).host
+    return originHost === hostUrl.host && originHost !== ''
+  } catch {
+    return false
   }
-  const address = req.socket.remoteAddress ?? ''
-  return address === '127.0.0.1' || address === '::1' || address === '::ffff:127.0.0.1'
 }
 
-/** Read and parse a small JSON request body. */
+/**
+ * Read and parse a small JSON request body, capping the bytes buffered at
+ * {@link MAX_REQUEST_BODY_BYTES}. Two-layer size defense matches the upstream
+ * `bridge()`: the `Content-Length` header is checked first (cheap rejection
+ * for a client that announces an oversized body), then the actual stream is
+ * summed as it arrives so a missing or lying header still cannot exhaust
+ * memory. On overflow the socket is destroyed (matches upstream's
+ * `req.destroy()` + `connection: close`).
+ */
 function readJson(req: IncomingMessage): Promise<{ sessionId?: unknown }> {
   return new Promise((resolve, reject) => {
-    let body = ''
-    req.setEncoding('utf8')
-    req.on('data', (chunk: string) => { body += chunk })
+    const declared = req.headers['content-length']
+    if (declared !== undefined && Number(declared) > MAX_REQUEST_BODY_BYTES) {
+      reject(new Error('payload too large'))
+      req.destroy()
+      return
+    }
+    let received = 0
+    const chunks: Buffer[] = []
+    req.on('data', (chunk: Buffer) => {
+      received += chunk.byteLength
+      if (received > MAX_REQUEST_BODY_BYTES) {
+        req.removeAllListeners('data')
+        req.removeAllListeners('end')
+        reject(new Error('payload too large'))
+        req.destroy()
+        return
+      }
+      chunks.push(chunk)
+    })
     req.on('end', () => {
-      if (body.length === 0) { resolve({}); return }
-      try { resolve(JSON.parse(body) as { sessionId?: unknown }) } catch { reject(new Error('invalid JSON body')) }
+      if (received === 0) { resolve({}); return }
+      try { resolve(JSON.parse(Buffer.concat(chunks).toString('utf8')) as { sessionId?: unknown }) }
+      catch { reject(new Error('invalid JSON body')) }
     })
     req.on('error', reject)
   })
@@ -143,8 +231,16 @@ export function apply(ctx: Context): void {
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify({ ok: true }))
       } catch (error) {
+        const message = error instanceof Error ? error.message : String(error)
+        // readJson rejects with 'payload too large' when the body exceeds the
+        // bridge cap; surface that as 413 (RFC 7231 §6.5.11), not 500.
+        if (message === 'payload too large') {
+          res.writeHead(413, { 'Content-Type': 'text/plain', connection: 'close' })
+          res.end('payload too large')
+          return
+        }
         res.writeHead(500, { 'Content-Type': 'text/plain' })
-        res.end(`unarchive failed: ${String(error)}`)
+        res.end(`unarchive failed: ${message}`)
       }
     },
   }), 'dsh-ui-archive-manager: unarchive route')

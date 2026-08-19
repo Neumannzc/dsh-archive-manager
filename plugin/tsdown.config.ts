@@ -66,15 +66,18 @@ export default {
   dts: false,
   sourcemap: true,
   clean: false,
-  external: CLIENT_EXTERNALS,
+  // Platform seed entries the dsh shell shares into its frozen module table
+  // stay external; everything else inlines (a require() the table cannot
+  // answer is a guaranteed runtime throw — handled by the default behavior
+  // of bundling every dep not listed in `neverBundle`).
+  deps: {
+    neverBundle: CLIENT_EXTERNALS,
+  },
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV ?? 'production'),
     'import.meta.env.MODE': JSON.stringify(process.env.NODE_ENV ?? 'production'),
     'import.meta.env': JSON.stringify({ MODE: process.env.NODE_ENV ?? 'production' }),
   },
-  // Anything NOT in the loader module table must inline instead; a require()
-  // the table cannot answer is a guaranteed runtime throw.
-  noExternal: (id: string) => (CLIENT_EXTERNALS.includes(id) ? undefined : true),
   plugins: [{
     // Bundle purity gate: platform seed entries stay external, every other
     // @deepseek-ai value import is a build error — cross-plugin collaboration

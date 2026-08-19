@@ -55,7 +55,9 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.client.json && tsdown",
-    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "pnpm run build"
   },
   "repository": {
@@ -81,6 +83,7 @@
     "lightningcss": "^1.33.0",
     "react": "^18.2.0",
     "tsdown": "^0.22.14",
-    "typescript": "~5.9.0"
+    "typescript": "~5.9.0",
+    "vitest": "^2.1.0"
   }
 }

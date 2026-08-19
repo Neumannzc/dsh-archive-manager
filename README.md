@@ -9,11 +9,11 @@ A beautified **archive manager** plugin for [DeepSeek Harness](https://github.co
 
 ## Features
 
-- **设置 → 归档管理** settings page (same `archives` section id as the official plugin).
+- **设置 → 归档管理** settings page (plugin-scoped id `archives-beautified`, distinct from any official `archives` id).
 - Archived sessions grouped by workspace, mirroring the sidebar grouping rules.
 - Beautified UI: flat session rows, folder group headers, relative timestamps (`3min ago` / `3分钟前`), hover-only unarchive icon button.
 - **Self-contained unarchive**: the plugin's node half patches `WorkspaceRegistry.unarchiveSession` when the official release lacks it (idempotent — a future official method wins) and exposes it to the browser over the official `webServer` carrier; state changes propagate to every tab through the core `archived-sessions-changed` frame.
-- Trust fence on the unarchive route: loopback or same-origin only.
+- Trust fence on the unarchive route: mirrors `client-connection`'s `isTrustedApiRequest` — DNS-rebinding defense via a mandatory `Host` fence, cross-site refused, opaque `Origin: null` refused, LAN deployments add their bound authority to the `trustedHosts` list; plus an 8 KiB body-size cap with two-layer defense (Content-Length precheck + streaming byte count).
 
 ## Install
 
@@ -39,7 +39,7 @@ Restart the dsh profile, then open **设置 → 归档管理**.
 | path | what |
 | --- | --- |
 | `plugin/` | The published npm package ([`@tangzai/dsh-ui-archive-manager`](https://www.npmjs.com/package/@tangzai/dsh-ui-archive-manager)): node half (`src/index.ts`), browser half (`src/client/`), build config, `cordis.patch.yml` |
-| `PUBLISHING.md` | Publish / npm-search / maintenance guide (中文) |
+| `PUBLISHING.md` / `PUBLISHING.en.md` | Publish / npm-search / maintenance guide (中文 source of truth, English mirror) |
 | `packages/` … `apps/` | The upstream dsh monorepo snapshot this feature was developed in (the archive-manager settings section, incl. `workspace.unarchiveSession` core work, later rolled back upstream) |
 
 ## Development
@@ -48,7 +48,8 @@ Restart the dsh profile, then open **设置 → 归档管理**.
 cd plugin
 pnpm install
 pnpm run build       # tsc node half + client type declarations + tsdown client bundle
-pnpm run typecheck
+pnpm run typecheck   # tsc on node half, client half, and tests
+pnpm run test        # vitest: derive / relativeTime / locale completeness
 ```
 
 ## License

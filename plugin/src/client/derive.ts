@@ -33,6 +33,36 @@ export interface ArchivedGroupNode {
   sessions: readonly ArchivedSessionNode[]
 }
 
+/** Relative-time bucket for archived session rows. */
+export type RelativeTimeUnit = 'now' | 'minutes' | 'hours' | 'days' | 'months' | 'years'
+
+/** Structured relative time: the bucket plus its magnitude (0 for 'now'). */
+export interface RelativeTime {
+  unit: RelativeTimeUnit
+  n: number
+}
+
+/**
+ * Compact relative time for session rows, matching the sidebar tree pattern
+ * (upstream `ui-workspace/tree.ts:relativeTime` — same buckets, same
+ * boundaries, same constants).
+ * @param updatedAt - epoch ms of the session's last activity.
+ * @param now - current epoch ms (injected for pure rendering).
+ * @returns the row's trailing time bucket and magnitude.
+ */
+export function relativeTime(updatedAt: number, now: number): RelativeTime {
+  const MIN = 60_000
+  const HOUR = 3_600_000
+  const DAY = 86_400_000
+  const diff = Math.max(0, now - updatedAt)
+  if (diff < MIN) return { unit: 'now', n: 0 }
+  if (diff < HOUR) return { unit: 'minutes', n: Math.floor(diff / MIN) }
+  if (diff < DAY) return { unit: 'hours', n: Math.floor(diff / HOUR) }
+  if (diff < 30 * DAY) return { unit: 'days', n: Math.floor(diff / DAY) }
+  if (diff < 365 * DAY) return { unit: 'months', n: Math.floor(diff / (30 * DAY)) }
+  return { unit: 'years', n: Math.floor(diff / (365 * DAY)) }
+}
+
 /** Whether one summary is a top-level row in the archived view (blank and subagent rows are not). */
 function archivedRowVisible(summary: SessionSummary | undefined): boolean {
   return summary !== undefined
