@@ -1,7 +1,7 @@
 {
   "name": "@tangzai/dsh-ui-archive-manager",
   "description": "Beautified archive manager for DeepSeek Harness (dsh): a settings section listing archived sessions grouped by workspace, each with an unarchive action, with a flat session list, folder group headers, relative timestamps and hover unarchive buttons.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "keywords": [
     "dsh",
